@@ -120,7 +120,7 @@ img{display:block;max-width:100%}
 }
 .nav.scrolled::after{transform:scaleX(1);opacity:.55}
 .nav__logo img{height:42px;width:auto;filter:brightness(0) invert(1);opacity:.92}
-.nav__links{display:flex;gap:2.4rem;align-items:center}
+.nav__links{display:flex;gap:1.5rem;align-items:center}
 .nav__links a{
   font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
   position:relative;transition:color .3s ease;
@@ -414,6 +414,64 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
 .chat__foot input:focus{outline:none;border-color:var(--gold)}
 .chat__foot button{width:42px;height:42px;border-radius:50%;border:none;background:var(--gold);color:var(--bg);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s}
 .chat__foot button:hover{background:var(--gold2)}
+.fab img{width:32px;height:32px;object-fit:contain;border-radius:4px}
+
+/* ---------- Galería (masonry) ---------- */
+.galeria{background:var(--bg)}
+.gallery{column-count:3;column-gap:1.1rem}
+.g-item{position:relative;break-inside:avoid;margin:0 0 1.1rem;border-radius:8px;overflow:hidden;border:1px solid var(--border);cursor:pointer}
+.g-item img{width:100%;display:block;transition:transform 1.1s cubic-bezier(.16,1,.3,1)}
+.g-item::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 38%,rgba(10,0,0,.9));opacity:0;transition:.45s ease}
+.g-item figcaption{position:absolute;left:0;bottom:0;z-index:2;padding:1.1rem 1.2rem;font-family:var(--serif);font-style:italic;font-size:1.05rem;line-height:1.2;color:var(--text);opacity:0;transform:translateY(10px);transition:.45s ease}
+.g-item:hover img{transform:scale(1.07)}
+.g-item:hover::after{opacity:1}
+.g-item:hover figcaption{opacity:1;transform:none}
+
+/* ---------- Experiencias ---------- */
+.experiencias{background:var(--bg2)}
+.exp{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.exp__media{position:relative;border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+.exp__media img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/3}
+.exp__tag{position:absolute;left:1.2rem;bottom:1.2rem;background:var(--gold);color:#fff;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:.45rem .9rem;border-radius:3px}
+.exp__body h2{font-family:var(--serif);font-weight:700;font-size:clamp(2rem,4vw,3rem);line-height:1.08;margin:1rem 0 1.2rem}
+.exp__body h2 em{font-style:italic;color:var(--gold2)}
+.exp__body>p{color:var(--muted);margin-bottom:1.8rem;max-width:46ch}
+.exp__list{list-style:none;display:flex;flex-direction:column;gap:1.1rem}
+.exp__list li{padding-left:1.4rem;position:relative}
+.exp__list li::before{content:"";position:absolute;left:0;top:.55rem;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.exp__list b{display:block;font-size:1.02rem;color:var(--text)}
+.exp__list span{color:var(--muted);font-size:.92rem}
+
+/* ---------- El Chef — fotos editorial ---------- */
+.chef__grid{grid-template-columns:1fr 1.05fr;align-items:center}
+.chef__photos{position:relative;padding:0 0 3.5rem}
+.chef-ph-main{width:80%;border-radius:10px;border:1px solid var(--border);display:block}
+.chef-ph-sm{position:absolute;right:0;bottom:0;width:46%;border-radius:8px;border:4px solid var(--bg);box-shadow:0 24px 60px -20px rgba(0,0,0,.85)}
+.chef-ph-badge{position:absolute;left:0;top:1.4rem;background:var(--gold);color:#fff;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;padding:.45rem 1rem;border-radius:3px}
+.chef__name{font-family:var(--serif);font-weight:700;font-size:clamp(2.2rem,4.4vw,3.2rem);margin:.8rem 0 1.2rem;line-height:1}
+.chef__name em{font-style:italic;color:var(--gold2)}
+.chef__text>p{color:var(--muted);max-width:44ch}
+.chef__text .counters{flex-direction:row;flex-wrap:wrap;gap:2rem;margin:2.2rem 0}
+.chef__text .counter b{font-size:clamp(2.4rem,4vw,3rem)}
+
+/* ---------- Cómo trabajo ---------- */
+.como{background:var(--bg)}
+.como__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem}
+.como__card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:2rem;transition:.4s ease}
+.como__card:hover{border-color:var(--gold);transform:translateY(-4px)}
+.como__n{font-family:var(--serif);font-weight:700;font-size:3rem;color:var(--gold);opacity:.5;line-height:1;display:block;margin-bottom:.5rem}
+.como__card h3{font-family:var(--serif);font-size:1.5rem;font-weight:700;margin-bottom:.6rem}
+.como__card p{color:var(--muted);font-size:.95rem}
+
+/* ---------- CTA ---------- */
+.cta{position:relative;padding:9rem 0;background:var(--bg2);text-align:center;overflow:hidden}
+.cta__ghost{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--serif);font-weight:900;font-size:22vw;color:var(--text);opacity:.025;pointer-events:none;line-height:1;white-space:nowrap}
+.cta__inner{position:relative;z-index:2;max-width:680px;margin:0 auto}
+.cta__inner h2{font-family:var(--serif);font-weight:700;font-size:clamp(2.6rem,6vw,4.2rem);line-height:1.05;margin:1rem 0 1.2rem}
+.cta__inner h2 em{font-style:italic;color:var(--gold2)}
+.cta__inner>p{color:var(--muted);max-width:48ch;margin:0 auto 2.4rem}
+.cta__actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.cta__actions .btn-gold{border:none;cursor:pointer;font-family:var(--sans)}
 
 /* ---------- Responsive ---------- */
 @media(max-width:900px){
@@ -432,13 +490,18 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
   .coc--mex,.coc--fra,.coc--ita{grid-column:span 2;grid-row:span 1}
   .chef__grid,.form-grid{grid-template-columns:1fr;gap:3rem}
   .counters{flex-direction:row;flex-wrap:wrap;gap:1.6rem}
+  .gallery{column-count:2}
+  .exp{grid-template-columns:1fr;gap:2.5rem}
+  .como__grid{grid-template-columns:1fr}
+  .chef__photos{padding-bottom:0;max-width:460px}
 }
 @media(max-width:600px){
   .sec{padding:6rem 0}
-  form .row.c3,form .row.c2{grid-template-columns:1fr}
   .grid-coc{grid-template-columns:1fr;grid-auto-rows:200px}
   .coc--med{grid-column:span 1;grid-row:span 1}
   .chat{bottom:84px;height:70vh}
+  .gallery{column-count:1}
+  .chef__text .counters{gap:1.4rem}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
@@ -455,10 +518,13 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
 <nav class="nav" id="nav">
   <a class="nav__logo" href="#top" data-cursor><img src="https://chefkaexperience.com/wp-content/uploads/2019/01/javierchecachef-logo.png" alt="Chefka Experience" /></a>
   <div class="nav__links">
-    <a href="#cocinas" data-cursor>Menús</a>
+    <a href="#top" data-cursor>Inicio</a>
+    <a href="#menus" data-cursor>Menús</a>
+    <a href="#experiencias" data-cursor>Experiencias</a>
     <a href="#chef" data-cursor>El Chef</a>
-    <a href="#bono" data-cursor>Experiencias</a>
-    <a href="#formulario" class="nav__cta" data-cursor>Reservar</a>
+    <a href="#galeria" data-cursor>Galería</a>
+    <a href="#como-trabajo" data-cursor>Cómo trabajo</a>
+    <a href="#cta" class="nav__cta" data-cursor>Reservar</a>
   </div>
   <div class="nav__burger" id="burger"><span></span><span></span><span></span></div>
 </nav>
@@ -483,7 +549,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
       </h1>
       <p class="hero__sub">Chef Privado · Javier Checa · Madrid</p>
       <p class="hero__rotor">Cocina <span class="rot" id="rotor">Mediterránea</span></p>
-      <a href="#formulario" class="hero__cta" data-cursor>Reserva tu Experiencia <span class="arr">→</span></a>
+      <a href="#cta" class="hero__cta" data-cursor>Reserva tu Experiencia <span class="arr">→</span></a>
     </div>
 
     <div class="hero__stats" id="heroStats">
@@ -530,12 +596,13 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
     </div>
   </section>
 
-  <!-- COCINAS -->
-  <section class="sec cocinas" id="cocinas" data-scroll-section>
+  <!-- MENÚS -->
+  <section class="sec cocinas" id="menus" data-scroll-section>
     <div class="wrap">
       <div class="sec__head rv">
-        <span class="eyebrow">Las cocinas</span>
+        <span class="eyebrow">Confección de menús</span>
         <h2>Cinco mundos. <em>Un solo chef.</em></h2>
+        <p style="color:var(--muted);margin-top:1.2rem;max-width:52ch">Cada menú se confecciona desde cero, adaptado a tus gustos, a tus invitados y a tu presupuesto. Elige el mundo que quieres traer a tu mesa: cinco cocinas de autor, todas firmadas por Javier Checa.</p>
       </div>
       <div class="grid-coc rv">
         <div class="coc coc--med" data-cursor>
@@ -562,18 +629,59 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
     </div>
   </section>
 
+  <!-- GALERÍA -->
+  <section class="sec galeria" id="galeria" data-scroll-section>
+    <div class="wrap">
+      <div class="sec__head rv">
+        <span class="eyebrow">Galería</span>
+        <h2>El plato como <em>obra de autor</em></h2>
+        <p style="color:var(--muted);margin-top:1.2rem;max-width:50ch">Una selección de creaciones reales del chef Javier Checa. Producto de temporada, técnica precisa y una puesta en escena pensada para emocionar.</p>
+      </div>
+      <div class="gallery rv" id="gallery"></div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCIAS -->
+  <section class="sec experiencias" id="experiencias" data-scroll-section>
+    <div class="wrap">
+      <div class="exp">
+        <div class="exp__media rv-l">
+          <img src="https://chefkaexperience.com/wp-content/uploads/menus-tematicos.jpg" alt="Experiencia gastronómica Chefka" loading="lazy" />
+          <span class="exp__tag">Alta restauración a domicilio</span>
+        </div>
+        <div class="exp__body rv-r">
+          <span class="eyebrow">Experiencias gastronómicas</span>
+          <h2>Una experiencia de autor, <em>en tu propia casa</em></h2>
+          <p>Alta restauración dirigida a particulares y empresas. El chef Javier Checa convierte tu hogar —o tu espacio de trabajo— en un restaurante íntimo para una noche irrepetible.</p>
+          <ul class="exp__list">
+            <li><b>Cenas y almuerzos privados</b><span>Una velada de autor para los tuyos, sin salir de casa.</span></li>
+            <li><b>Celebraciones especiales</b><span>Cumpleaños, aniversarios y momentos que merecen una mesa única.</span></li>
+            <li><b>Eventos de empresa</b><span>Experiencias gastronómicas para sorprender a clientes y equipos.</span></li>
+            <li><b>Menú degustación</b><span>Un recorrido por platos, matices y texturas pensado para ti.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- EL CHEF -->
   <section class="sec chef" id="chef" data-scroll-section>
     <div class="wrap">
       <div class="chef__grid">
-        <div class="counters rv-l" id="counters">
-          <div class="counter"><b data-count="15" data-suffix="">0</b><span>años de trayectoria</span></div>
-          <div class="counter"><b data-count="500" data-suffix="+">0</b><span>eventos servidos</span></div>
-          <div class="counter"><b data-count="62" data-suffix=" ★">0</b><span>reseñas Google</span></div>
+        <div class="chef__photos rv-l">
+          <img class="chef-ph-main" src="chef-perfil-1.jpeg" alt="Javier Checa, chef privado" loading="lazy" />
+          <img class="chef-ph-sm" src="chef-perfil-2.jpeg" alt="Javier Checa, Chefka Experience" loading="lazy" />
+          <span class="chef-ph-badge">Javier Checa</span>
         </div>
         <div class="chef__text rv-r">
           <span class="eyebrow">El chef</span>
-          <p style="margin-top:1.4rem">Con más de 15 años de trayectoria en alta cocina, <span class="gold">Javier Checa</span> ha convertido el hogar de sus clientes en el mejor restaurante de la ciudad. Su cocina es intimista, precisa y profundamente personal. Cada menú, creado desde cero para ti.</p>
+          <h2 class="chef__name">Javier <em>Checa</em></h2>
+          <p>Con más de 15 años de trayectoria en alta cocina, <span class="gold">Javier Checa</span> ha convertido el hogar de sus clientes en el mejor restaurante de la ciudad. Su cocina es intimista, precisa y profundamente personal. Cada menú, creado desde cero para ti.</p>
+          <div class="counters" id="counters">
+            <div class="counter"><b data-count="15" data-suffix="">0</b><span>años de trayectoria</span></div>
+            <div class="counter"><b data-count="500" data-suffix="+">0</b><span>eventos servidos</span></div>
+            <div class="counter"><b data-count="62" data-suffix=" ★">0</b><span>reseñas Google</span></div>
+          </div>
           <div class="sign">— Javier Checa, Chefka Experience</div>
         </div>
       </div>
@@ -590,8 +698,41 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
         <h2>Regala una <em class="gold" style="font-style:italic">Experiencia Única</em></h2>
         <p>Una cena para dos elaborada por el chef Javier Checa. Bono digital personalizado · Válido 6 meses.</p>
         <div style="display:flex;gap:1rem;flex-wrap:wrap">
-          <a href="#formulario" class="btn-gold" data-cursor>Ver Bono Regalo <span class="arr">→</span></a>
+          <a href="#cta" class="btn-gold" data-cursor>Ver Bono Regalo <span class="arr">→</span></a>
           <a href="https://wa.me/34660693887" target="_blank" rel="noopener" class="btn-ghost" data-cursor>Hablar con el chef</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÓMO TRABAJO Y CONDICIONES -->
+  <section class="sec como" id="como-trabajo" data-scroll-section>
+    <div class="wrap">
+      <div class="sec__head rv">
+        <span class="eyebrow">Cómo trabajo y condiciones</span>
+        <h2>Todo resuelto, <em>de principio a fin</em></h2>
+        <p style="color:var(--muted);margin-top:1.2rem;max-width:54ch">Tú eliges la fecha y los invitados; del resto se encarga el chef. Esto es lo que incluye una experiencia Chefka y cómo se reserva.</p>
+      </div>
+      <div class="como__grid rv">
+        <div class="como__card">
+          <span class="como__n">01</span>
+          <h3>Qué incluye</h3>
+          <p>Chef y equipo a domicilio, selección y compra de la materia prima, elaboración en directo, servicio en mesa y la cocina recogida e impecable al terminar.</p>
+        </div>
+        <div class="como__card">
+          <span class="como__n">02</span>
+          <h3>Menú a medida</h3>
+          <p>Cada menú se confecciona desde cero según tus gustos, los de tus invitados, alergias e intolerancias. Nada prefabricado: una propuesta única para tu mesa.</p>
+        </div>
+        <div class="como__card">
+          <span class="como__n">03</span>
+          <h3>Presupuesto</h3>
+          <p>El presupuesto es personalizado según el número de comensales y el menú elegido. El chef te lo confecciona a medida tras conocer los detalles del evento.</p>
+        </div>
+        <div class="como__card">
+          <span class="como__n">04</span>
+          <h3>Zona y reserva</h3>
+          <p>Servicio en Madrid y alrededores. Se confirma disponibilidad para tu fecha y se cierra el menú directamente con el chef antes del evento.</p>
         </div>
       </div>
     </div>
@@ -610,48 +751,18 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
     </div>
   </section>
 
-  <!-- FORMULARIO -->
-  <section class="form-sec" id="formulario" data-scroll-section>
+  <!-- CTA -->
+  <section class="cta" id="cta" data-scroll-section>
+    <div class="cta__ghost" aria-hidden="true">RESERVA</div>
     <div class="wrap">
-      <div class="form-grid">
-        <div class="form-aside rv-l">
-          <span class="eyebrow">Reserva</span>
-          <h2>Reserva tu <em class="gold" style="font-style:italic">experiencia</em></h2>
-          <p>Cuéntanos los detalles de tu evento. El chef Javier Checa te contactará para personalizar tu menú.</p>
-          <div class="meta">
-            <a href="tel:+34660693887" data-cursor><span class="k">Tel</span> 660 69 38 87</a>
-            <a href="mailto:info@chefkaexperience.com" data-cursor><span class="k">Email</span> info@chefkaexperience.com</a>
-            <a href="https://instagram.com/chefkaexperience" target="_blank" rel="noopener" data-cursor><span class="k">Social</span> @chefkaexperience</a>
-          </div>
-        </div>
-        <div class="rv-r">
-          <form id="reservaForm" novalidate>
-            <div class="row c3">
-              <div class="field"><label for="nombre">Nombre *</label><input id="nombre" name="nombre" type="text" required autocomplete="name" /></div>
-              <div class="field"><label for="email">Email *</label><input id="email" name="email" type="email" required autocomplete="email" /></div>
-              <div class="field"><label for="telefono">Teléfono *</label><input id="telefono" name="telefono" type="tel" required autocomplete="tel" /></div>
-            </div>
-            <div class="row c2">
-              <div class="field"><label for="localidad">Localidad del evento *</label><input id="localidad" name="localidad" type="text" required /></div>
-              <div class="field"><label for="fecha">Fecha del evento *</label><input id="fecha" name="fecha" type="date" required /></div>
-            </div>
-            <div class="row c2">
-              <div class="field"><label for="personas">Número de personas *</label><input id="personas" name="personas" type="number" min="1" required /></div>
-              <div class="field"><label for="servicio">Servicio *</label>
-                <select id="servicio" name="servicio" required>
-                  <option value="" disabled selected>Selecciona…</option>
-                  <option value="Almuerzo">Almuerzo</option>
-                  <option value="Cena">Cena</option>
-                </select>
-              </div>
-            </div>
-            <div class="row">
-              <div class="field"><label for="observaciones">Observaciones</label><textarea id="observaciones" name="observaciones" placeholder="Tipo de cocina preferida, alergias, ocasión especial…"></textarea></div>
-            </div>
-            <label class="check"><input type="checkbox" id="privacidad" required /> He leído y acepto la política de privacidad y el tratamiento de mis datos para gestionar la reserva.</label>
-            <button type="submit" class="submit" id="submitBtn" data-cursor>Reserva tu Experiencia</button>
-            <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
-          </form>
+      <div class="cta__inner rv">
+        <span class="eyebrow">Reserva</span>
+        <h2>¿Listo para tu <em>experiencia</em>?</h2>
+        <p>Habla con <b>Elena</b>, nuestra asistente. Te ayuda a elegir el menú, toma los datos de tu evento y el chef Javier Checa te contacta para confirmarlo todo.</p>
+        <div class="cta__actions">
+          <button type="button" class="btn-gold" data-openchat data-cursor>Habla con Elena <span class="arr">→</span></button>
+          <a href="tel:+34660693887" class="btn-ghost" data-cursor>660 69 38 87</a>
+          <a href="mailto:info@chefkaexperience.com" class="btn-ghost" data-cursor>info@chefkaexperience.com</a>
         </div>
       </div>
     </div>
@@ -669,7 +780,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
           <h4>Contacto</h4>
           <a href="tel:+34660693887">660 69 38 87</a>
           <a href="mailto:info@chefkaexperience.com">info@chefkaexperience.com</a>
-          <a href="#formulario">Reservar experiencia</a>
+          <a href="#cta">Reservar experiencia</a>
         </div>
         <div class="footer__col">
           <h4>Síguenos</h4>
@@ -689,9 +800,9 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
 </div>
 
 <!-- CHATBOT -->
-<div class="fab" id="fab" aria-label="Abrir chat" role="button" tabindex="0">
+<div class="fab" id="fab" aria-label="Abrir chat con Elena" role="button" tabindex="0">
   <span class="ping"></span>
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8M12 15v7M5 3h14l-1 7a6 6 0 0 1-12 0L5 3z"/></svg>
+  <img src="logo-chefka.jpeg" alt="Chefka Experience" width="32" height="32" />
 </div>
 <div class="chat" id="chat" aria-live="polite">
   <div class="chat__head">
@@ -866,52 +977,40 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
     ticker.innerHTML = html;
   }
 
-  /* ---------- Form submit ---------- */
-  var form = document.getElementById('reservaForm');
-  var msg = document.getElementById('formMsg');
-  var btn = document.getElementById('submitBtn');
-  if (form){
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      msg.className = 'form-msg';
-      var f = form;
-      if (!f.nombre.value.trim() || !f.email.value.trim() || !f.telefono.value.trim() ||
-          !f.localidad.value.trim() || !f.fecha.value || !f.personas.value || !f.servicio.value){
-        msg.textContent = 'Por favor, completa los campos obligatorios.'; msg.classList.add('err'); return;
-      }
-      if (!document.getElementById('privacidad').checked){
-        msg.textContent = 'Debes aceptar la política de privacidad.'; msg.classList.add('err'); return;
-      }
-      var obs = f.observaciones.value.trim();
-      var fecha = f.fecha.value, personas = f.personas.value, servicio = f.servicio.value, localidad = f.localidad.value.trim();
-      var mensaje = (obs ? obs + ' ' : '') + '| Fecha: ' + fecha + ' | Personas: ' + personas + ' | Servicio: ' + servicio + ' | Localidad: ' + localidad;
-
-      btn.disabled = true; btn.textContent = 'Enviando…';
-
-      var payload = {
-        nombre:f.nombre.value.trim(),
-        telefono:f.telefono.value.trim(),
-        email:f.email.value.trim(),
-        sector:'hosteleria-chef',
-        interes:'chefka-experience',
-        mensaje:mensaje,
-        origen:'chefka-experience-web',
-        fecha:new Date().toISOString()
-      };
-
-      Promise.all([
-        saveLead(payload),
-        notifyWhatsApp({ nombre:payload.nombre, telefono:payload.telefono, fecha:fecha, personas:personas, servicio:servicio, localidad:localidad })
-      ]).then(function(){
-        btn.textContent = '¡Reserva recibida!';
-        msg.textContent = 'Gracias. El chef Javier Checa te contactará en breve.'; msg.classList.add('ok');
-        form.reset();
-        setTimeout(function(){ btn.disabled=false; btn.textContent='Reserva tu Experiencia'; }, 4000);
-      }).catch(function(){
-        btn.disabled=false; btn.textContent='Reserva tu Experiencia';
-        msg.textContent='Ha ocurrido un error. Llámanos al 660 69 38 87.'; msg.classList.add('err');
-      });
+  /* ---------- Gallery (real dishes, masonry) ---------- */
+  var dishes = [
+    {f:'Lomo-de-Bonito-del-Norte-encostrado-en-olivas-piquillos-en-dos-texturas-y-huevas-de-pez-volador.jpg', n:'Lomo de bonito del norte encostrado'},
+    {f:'Ceviche-de-Corvina-y-Gambón-con-leche-de-tigre-de-remolacha-mango-y-yuzu.jpg', n:'Ceviche de corvina y gambón'},
+    {f:'Carrillera-ibérica-estofada-en-manzanilla-parmentier-de-setas-shitake-y-fondant-de-quesito-empanizado.jpg', n:'Carrillera ibérica estofada'},
+    {f:'Risotto-de-Boletus-Edulis-trigueros-y-mollejas-de-pato-confitadas.jpg', n:'Risotto de boletus y mollejas de pato'},
+    {f:'Niguiris-de-Causa-Limeña-y-Pulpo-con-emulsión-de-Huancaína.jpg', n:'Niguiris de causa limeña y pulpo'},
+    {f:'Magret-de-Pato-con-caramelo-de-uvas-y-crumble-de-manzana-ácida.jpg', n:'Magret de pato y caramelo de uvas'},
+    {f:'Milhoja-de-Presa-Ibérica-y-Queso-de-Cabra-con-Salsa-Romesco.jpg', n:'Milhoja de presa ibérica y queso de cabra'},
+    {f:'Gambón-braseado-con-emulsión-de-su-jugo-wakame-aceite-de-sésamo-y-lima.jpg', n:'Gambón braseado, wakame y lima'},
+    {f:'Carpaccio-de-boletus-esponja-de-lúpulo-praliné-de-maní-y-almendras-tostadas.jpg', n:'Carpaccio de boletus y praliné'},
+    {f:'Mejillones-abiertos-al-momento-en-vapor-de-Sake-Japonés-y-Ajilimoji-con-ajetes-tiernos-en-tempura.jpg', n:'Mejillones al vapor de sake japonés'},
+    {f:'Falso-torrezno-relleno-de-costillar-ibérico-glaseado-al-punto-de-kimchi.jpg', n:'Falso torrezno de costillar ibérico'},
+    {f:'Cubalibre-de-Foie-con-gel-Dry-Martini-Hierbabuena-y-Pan-de-especias.jpg', n:'Cubalibre de foie y Dry Martini'},
+    {f:'Pez-mantequilla-en-escabeche-y-arroz-salvaje-crujiente.jpg', n:'Pez mantequilla en escabeche'},
+    {f:'Crema-de-Cebollitas-Francesas.jpg', n:'Crema de cebollitas francesas'},
+    {f:'Ensalada-Ecológica-de-sémola-de-trigo-con-sardina-ahumada.jpg', n:'Ensalada ecológica y sardina ahumada'},
+    {f:'Coulant-artesano-de-Chocolate-con-fresas-salteadas-en-balsámico-dulce.jpg', n:'Coulant artesano de chocolate'},
+    {f:'tiramisu-deconstruido-crema-inglesa-cafe-baileys.jpg', n:'Tiramisú deconstruido, café y Baileys'},
+    {f:'Torrija-de-Brioche-con-espuma-de-zanahoria-con-toque-de-anís-estrellado.jpg', n:'Torrija de brioche y zanahoria'},
+    {f:'Espuma-de-Membrillo-con-Fresones-de-Aranjuez.jpg', n:'Espuma de membrillo y fresones de Aranjuez'},
+    {f:'Arroz-con-leche-de-chicha-morada-y-nubes-de-golosina.jpg', n:'Arroz con leche de chicha morada'},
+    {f:'solomillo-vacuno-braseado.jpg', n:'Solomillo de vacuno braseado'},
+    {f:'entrecot.jpg', n:'Entrecot a la brasa'},
+    {f:'trampantojo-tomate-huerta.jpg', n:'Trampantojo de tomate de la huerta'}
+  ];
+  var galleryEl = document.getElementById('gallery');
+  if (galleryEl){
+    var GBASE = 'https://chefkaexperience.com/wp-content/uploads/';
+    var gh = '';
+    dishes.forEach(function(d){
+      gh += '<figure class="g-item"><img src="'+encodeURI(GBASE+d.f)+'" alt="'+d.n+'" loading="lazy" /><figcaption>'+d.n+'</figcaption></figure>';
     });
+    galleryEl.innerHTML = gh;
   }
 
   /* ---------- Chatbot Elena ---------- */
@@ -1009,6 +1108,11 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
     send(b.getAttribute('data-q'));
   });
 
+  /* ---------- "Habla con Elena" buttons open the chat ---------- */
+  document.querySelectorAll('[data-openchat]').forEach(function(el){
+    el.addEventListener('click', function(e){ e.preventDefault(); openChat(); });
+  });
+
   /* ---------- Custom cursor (desktop) ---------- */
   if (DESKTOP && !REDUCE){
     var cursor = document.getElementById('cursor');
@@ -1028,7 +1132,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
 
   /* ---------- Mobile burger -> jump to reservar ---------- */
   var burger = document.getElementById('burger');
-  if (burger){ burger.addEventListener('click', function(){ var f=document.getElementById('formulario'); if(loco) loco.scrollTo(f); else f.scrollIntoView({behavior:'smooth'}); }); }
+  if (burger){ burger.addEventListener('click', function(){ var f=document.getElementById('cta'); if(loco) loco.scrollTo(f); else f.scrollIntoView({behavior:'smooth'}); }); }
 
 })();
 </script>
