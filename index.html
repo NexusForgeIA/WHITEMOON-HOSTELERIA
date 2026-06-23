@@ -532,14 +532,14 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
 .exp__list span{color:var(--muted);font-size:.92rem}
 
 /* ---------- El Chef — fotos editorial ---------- */
-.chef__grid{grid-template-columns:1fr 1.05fr;align-items:center}
+.chef__grid{grid-template-columns:45fr 55fr;gap:60px;align-items:start}
 .chef__photos{position:relative;padding:0 0 3.5rem}
-.chef-ph-main{width:80%;border-radius:10px;border:1px solid var(--border);display:block}
-.chef-ph-sm{position:absolute;right:0;bottom:0;width:46%;border-radius:8px;border:4px solid var(--bg);box-shadow:0 24px 60px -20px rgba(0,0,0,.85)}
+.chef-ph-main{width:88%;min-height:600px;object-fit:cover;border-radius:10px;border:1px solid var(--border);display:block}
+.chef-ph-sm{position:absolute;right:0;bottom:0;width:54%;min-height:300px;object-fit:cover;border-radius:8px;border:4px solid var(--bg);box-shadow:0 24px 60px -20px rgba(0,0,0,.85)}
 .chef-ph-badge{position:absolute;left:0;top:1.4rem;background:var(--gold);color:#fff;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;padding:.45rem 1rem;border-radius:3px}
-.chef__name{font-family:var(--serif);font-weight:700;font-size:clamp(2.2rem,4.4vw,3.2rem);margin:.8rem 0 1.2rem;line-height:1}
+.chef__name{font-family:var(--serif);font-weight:700;font-size:clamp(2.4rem,4vw,3.5rem);margin:.8rem 0 1.2rem;line-height:1}
 .chef__name em{font-style:italic;color:var(--gold2)}
-.chef__text>p{color:var(--muted);max-width:44ch}
+.chef__text>p{color:var(--muted);max-width:50ch;font-size:1.05rem;line-height:1.7;font-weight:400}
 .chef__text .counters{flex-direction:row;flex-wrap:wrap;gap:2rem;margin:2.2rem 0}
 .chef__text .counter b{font-size:clamp(2.4rem,4vw,3rem)}
 
@@ -623,7 +623,9 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
   .gallery{column-count:2}
   .exp{grid-template-columns:1fr;gap:2.5rem}
   .como__grid{grid-template-columns:1fr}
-  .chef__photos{padding-bottom:0;max-width:460px}
+  .chef__photos{padding:0 0 3rem;max-width:none}
+  .chef-ph-main{width:100%;min-height:420px}
+  .chef-ph-sm{width:50%;min-height:200px}
 }
 @media(max-width:600px){
   .sec{padding:6rem 0}
