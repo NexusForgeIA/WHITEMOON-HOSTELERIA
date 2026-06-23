@@ -136,8 +136,97 @@ img{display:block;max-width:100%}
   color:var(--gold2)!important;
 }
 .nav__cta:hover{background:var(--gold);color:var(--bg)!important;border-color:var(--gold)}
-.nav__burger{display:none;flex-direction:column;gap:5px;cursor:pointer}
-.nav__burger span{width:26px;height:1.5px;background:var(--text)}
+.nav__burger{display:none;flex-direction:column;gap:5px;cursor:pointer;position:relative;z-index:945}
+.nav__burger span{width:26px;height:1.5px;background:var(--text);transition:transform .3s ease,opacity .3s ease}
+.nav__burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav__burger.open span:nth-child(2){opacity:0}
+.nav__burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* ---------- Navbar dropdown "Mis propuestas" ---------- */
+.nav__caret{
+  display:inline-block;width:6px;height:6px;margin-left:.5rem;
+  border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:translateY(-2px) rotate(45deg);transition:transform .3s ease;
+}
+.nav__drop{position:relative}
+.nav__drop-toggle{
+  font-family:inherit;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);background:none;border:0;padding:0;cursor:pointer;
+  display:inline-flex;align-items:center;transition:color .3s ease;
+}
+.nav__drop-toggle:hover,.nav__drop:hover .nav__drop-toggle{color:var(--text)}
+.nav__drop:hover .nav__caret{transform:translateY(1px) rotate(225deg)}
+.nav__drop-menu{
+  position:absolute;top:calc(100% + 16px);left:50%;
+  transform:translateX(-50%) translateY(10px);
+  min-width:340px;background:#0F0000;border:1px solid rgba(204,0,0,0.3);border-radius:8px;
+  padding:.5rem;box-shadow:0 26px 60px rgba(0,0,0,.6);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .3s ease,transform .3s ease;z-index:950;
+}
+.nav__drop-menu::before{content:"";position:absolute;left:0;right:0;top:-16px;height:16px} /* hover bridge */
+.nav__drop:hover .nav__drop-menu,.nav__drop.open .nav__drop-menu{
+  opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0);
+}
+.nav__links .nav__drop-item{
+  display:flex;flex-direction:column;gap:.18rem;
+  padding:.7rem .9rem;border-radius:5px;text-transform:none;letter-spacing:normal;color:inherit;
+  transition:background .25s ease;cursor:pointer;
+}
+.nav__links .nav__drop-item::after{display:none}
+.nav__drop-name{font-family:var(--serif);font-size:1.08rem;font-weight:400;color:var(--text);transition:color .25s ease}
+.nav__drop-desc{font-family:var(--sans);font-size:.76rem;line-height:1.45;color:var(--muted);transition:color .25s ease}
+.nav__links .nav__drop-item:hover{background:#CC0000}
+.nav__links .nav__drop-item:hover .nav__drop-name,.nav__links .nav__drop-item:hover .nav__drop-desc{color:#fff}
+
+/* ---------- Menú móvil (hamburguesa) ---------- */
+.nav__mobile{display:none}
+.nav__mdrop-menu{overflow:hidden;max-height:0;transition:max-height .4s ease}
+@media(max-width:900px){
+  .nav__mobile{
+    display:block;position:fixed;top:0;left:0;width:100%;max-height:100dvh;overflow-y:auto;
+    background:#0F0000;border-bottom:1px solid rgba(204,0,0,0.3);
+    padding:5.6rem 6vw 2.2rem;z-index:880;
+    transform:translateY(-102%);opacity:0;visibility:hidden;
+    transition:transform .45s cubic-bezier(.16,1,.3,1),opacity .3s ease,visibility .3s;
+  }
+  .nav__mobile.open{transform:translateY(0);opacity:1;visibility:visible}
+  .nav__mobile a,.nav__mdrop-toggle{
+    display:block;width:100%;text-align:left;font-family:inherit;
+    font-size:.95rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    background:none;border:0;border-bottom:1px solid rgba(204,0,0,0.14);
+    padding:.95rem .2rem;cursor:pointer;transition:color .25s ease;
+  }
+  .nav__mobile a:hover,.nav__mdrop-toggle:hover{color:var(--text)}
+  .nav__mdrop-toggle{display:flex;align-items:center;justify-content:space-between}
+  .nav__mdrop.open .nav__mdrop-menu{max-height:720px}
+  .nav__mdrop.open .nav__caret{transform:translateY(1px) rotate(225deg)}
+  .nav__mobile .nav__mdrop-item{
+    display:flex;flex-direction:column;gap:.15rem;
+    padding:.75rem .8rem;margin:.35rem 0;border-radius:5px;border-bottom:0;
+    text-transform:none;letter-spacing:normal;color:inherit;
+    transition:background .25s ease;cursor:pointer;
+  }
+  .nav__mobile .nav__mdrop-item .nav__drop-name{font-size:1rem}
+  .nav__mobile .nav__mdrop-item .nav__drop-desc{font-size:.74rem}
+  .nav__mobile .nav__mdrop-item:active,.nav__mobile .nav__mdrop-item:hover{background:#CC0000}
+  .nav__mobile .nav__mdrop-item:active .nav__drop-name,.nav__mobile .nav__mdrop-item:hover .nav__drop-name,
+  .nav__mobile .nav__mdrop-item:active .nav__drop-desc,.nav__mobile .nav__mdrop-item:hover .nav__drop-desc{color:#fff}
+  .nav__mobile .nav__cta{
+    color:var(--gold2);border:1px solid var(--border);border-radius:2px;
+    text-align:center;margin-top:1.1rem;padding:.95rem;
+  }
+  .nav__mobile .nav__cta:hover{background:var(--gold);color:#fff}
+}
+
+/* ---------- Flash de resaltado al elegir propuesta ---------- */
+@keyframes cocFlash{
+  0%{box-shadow:0 0 0 0 rgba(204,0,0,0)}
+  18%{box-shadow:0 0 0 3px var(--gold2),0 0 46px rgba(204,0,0,.75)}
+  70%{box-shadow:0 0 0 3px var(--gold2),0 0 46px rgba(204,0,0,.55)}
+  100%{box-shadow:0 0 0 0 rgba(204,0,0,0)}
+}
+.coc--flash{animation:cocFlash 1.9s ease both;z-index:5}
 
 /* ---------- Hero ---------- */
 .hero{position:relative;height:100vh;min-height:680px;overflow:hidden;display:flex;align-items:center}
@@ -520,14 +609,33 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
   <div class="nav__links">
     <a href="#top" data-cursor>Inicio</a>
     <a href="#menus" data-cursor>Menús</a>
+    <div class="nav__drop" id="navDrop">
+      <button class="nav__drop-toggle" type="button" aria-haspopup="true" aria-expanded="false" data-cursor>Mis propuestas<i class="nav__caret" aria-hidden="true"></i></button>
+      <div class="nav__drop-menu" role="menu" aria-label="Mis propuestas"></div>
+    </div>
     <a href="#experiencias" data-cursor>Experiencias</a>
     <a href="#chef" data-cursor>El Chef</a>
     <a href="#galeria" data-cursor>Galería</a>
     <a href="#como-trabajo" data-cursor>Cómo trabajo</a>
     <a href="#cta" class="nav__cta" data-cursor>Reservar</a>
   </div>
-  <div class="nav__burger" id="burger"><span></span><span></span><span></span></div>
+  <div class="nav__burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navMobile"><span></span><span></span><span></span></div>
 </nav>
+
+<!-- MENÚ MÓVIL (hamburguesa) -->
+<div class="nav__mobile" id="navMobile" aria-hidden="true">
+  <a href="#top">Inicio</a>
+  <a href="#menus">Menús</a>
+  <div class="nav__mdrop" id="navMobileDrop">
+    <button class="nav__mdrop-toggle" type="button" aria-expanded="false">Mis propuestas<i class="nav__caret" aria-hidden="true"></i></button>
+    <div class="nav__mdrop-menu"></div>
+  </div>
+  <a href="#experiencias">Experiencias</a>
+  <a href="#chef">El Chef</a>
+  <a href="#galeria">Galería</a>
+  <a href="#como-trabajo">Cómo trabajo</a>
+  <a href="#cta" class="nav__cta">Reservar</a>
+</div>
 
 <div data-scroll-container id="scroll">
 <main id="top">
@@ -605,23 +713,23 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
         <p style="color:var(--muted);margin-top:1.2rem;max-width:52ch">Cada menú se confecciona desde cero, adaptado a tus gustos, a tus invitados y a tu presupuesto. Elige el mundo que quieres traer a tu mesa: cinco cocinas de autor, todas firmadas por Javier Checa.</p>
       </div>
       <div class="grid-coc rv">
-        <div class="coc coc--med" data-cursor>
+        <div class="coc coc--med" id="coc-med" data-cursor>
           <img src="https://chefkaexperience.com/wp-content/uploads/menu-mediterraneo-chef.jpg" alt="Cocina Mediterránea" loading="lazy" />
           <div class="coc__cap"><div class="k">01 — Raíz</div><h3>Mediterránea</h3></div>
         </div>
-        <div class="coc coc--jap" data-cursor>
+        <div class="coc coc--jap" id="coc-jap" data-cursor>
           <img src="https://chefkaexperience.com/wp-content/uploads/menu-tematico-oriental-fusion.jpg" alt="Cocina Japonesa Fusión" loading="lazy" />
           <div class="coc__cap"><div class="k">02 — Precisión</div><h3>Japonesa Fusión</h3></div>
         </div>
-        <div class="coc coc--ita" data-cursor>
+        <div class="coc coc--ita" id="coc-ita" data-cursor>
           <img src="https://chefkaexperience.com/wp-content/uploads/menu-tematico-italiano.jpg" alt="Cocina Italiana Siciliana" loading="lazy" />
           <div class="coc__cap"><div class="k">03 — Alma</div><h3>Italiana Siciliana</h3></div>
         </div>
-        <div class="coc coc--mex" data-cursor>
+        <div class="coc coc--mex" id="coc-mex" data-cursor>
           <img src="https://chefkaexperience.com/wp-content/uploads/menus-tematicos.jpg" alt="Cocina Mexicana Acapulqueña" loading="lazy" />
           <div class="coc__cap"><div class="k">04 — Fuego</div><h3>Mexicana Acapulqueña</h3></div>
         </div>
-        <div class="coc coc--fra" data-cursor>
+        <div class="coc coc--fra" id="coc-fra" data-cursor>
           <img src="https://chefkaexperience.com/wp-content/uploads/18304232_presentation-wide_normal_none-360x255.jpg" alt="Cocina Francesa" loading="lazy" />
           <div class="coc__cap"><div class="k">05 — Elegancia</div><h3>Francesa</h3></div>
         </div>
@@ -1161,9 +1269,109 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
     if (heroVid) heroVid.addEventListener('loadeddata', refreshLoco, {passive:true});
   }
 
-  /* ---------- Mobile burger -> jump to reservar ---------- */
-  var burger = document.getElementById('burger');
-  if (burger){ burger.addEventListener('click', function(){ var f=document.getElementById('cta'); if(f) gotoTarget(f); }); }
+  /* ---------- Navbar dropdown "Mis propuestas" + menú móvil ---------- */
+  /* Una sola fuente de datos: se renderiza en el dropdown de escritorio y en el
+     acordeón del menú hamburguesa. Al elegir una propuesta se hace scroll suave
+     a su cocina (#coc-*) y se resalta la tarjeta. */
+  var PROPUESTAS = [
+    { id:'coc-med', name:'Cocina Mediterránea',        desc:'Jamón ibérico, gambas y producto de la ría gallega. Carnes, pescados y postres de autor.' },
+    { id:'coc-jap', name:'Cocina Japonesa Fusión',     desc:'Sushi artesano, gyozas y ramen con alma madrileña y tailandesa. Tatakis y mochis cítricos.' },
+    { id:'coc-ita', name:'Cocina Italiana Siciliana',  desc:'La Sicilia auténtica: entrantes refinados, pastas, risottos y postres tradicionales.' },
+    { id:'coc-mex', name:'Cocina Mexicana Acapulqueña',desc:'Cochinita pibil, enchiladas de pato y tamales ibéricos. Fusión con guiños a Japón y Francia.' },
+    { id:'coc-fra', name:'Cocina Francesa',            desc:'Mousse de foie, vieiras braseadas, magret de pato y solomillo Rossini. Clásicos de autor.' }
+  ];
+
+  var burger    = document.getElementById('burger');
+  var navMobile = document.getElementById('navMobile');
+  var navDrop   = document.getElementById('navDrop');
+  var navMDrop  = document.getElementById('navMobileDrop');
+
+  function closeMobileMenu(){
+    if (navMobile){ navMobile.classList.remove('open'); navMobile.setAttribute('aria-hidden','true'); }
+    if (burger){ burger.classList.remove('open'); burger.setAttribute('aria-expanded','false'); }
+    if (navMDrop){ navMDrop.classList.remove('open'); var mt=navMDrop.querySelector('.nav__mdrop-toggle'); if(mt) mt.setAttribute('aria-expanded','false'); }
+  }
+  function closeDesktopDrop(){
+    if (navDrop){ navDrop.classList.remove('open'); var t=navDrop.querySelector('.nav__drop-toggle'); if(t) t.setAttribute('aria-expanded','false'); }
+  }
+
+  /* Selección de una propuesta -> scroll suave + resaltado de la tarjeta */
+  function selectProposal(id){
+    var card = document.getElementById(id) || document.getElementById('menus');
+    closeMobileMenu(); closeDesktopDrop();
+    if (!card) return;
+    gotoTarget(card);
+    if (card.classList.contains('coc')){
+      card.classList.remove('coc--flash');
+      void card.offsetWidth;            /* reinicia la animación si se reelige */
+      card.classList.add('coc--flash');
+      setTimeout(function(){ card.classList.remove('coc--flash'); }, 2000);
+    }
+  }
+
+  /* Render de los items en un contenedor dado */
+  function renderItems(container, itemClass){
+    if (!container) return;
+    PROPUESTAS.forEach(function(m){
+      var a = document.createElement('a');
+      a.href = '#' + m.id;
+      a.className = itemClass;
+      a.setAttribute('role','menuitem');
+      a.setAttribute('data-cursor','');
+      a.innerHTML = '<span class="nav__drop-name">' + m.name + '</span>' +
+                    '<span class="nav__drop-desc">' + m.desc + '</span>';
+      a.addEventListener('click', function(e){ e.preventDefault(); selectProposal(m.id); });
+      container.appendChild(a);
+    });
+  }
+  renderItems(document.querySelector('#navDrop .nav__drop-menu'), 'nav__drop-item');
+  renderItems(document.querySelector('#navMobileDrop .nav__mdrop-menu'), 'nav__mdrop-item');
+
+  /* Toggle del dropdown de escritorio por click (además del hover por CSS) */
+  if (navDrop){
+    var dToggle = navDrop.querySelector('.nav__drop-toggle');
+    if (dToggle) dToggle.addEventListener('click', function(e){
+      e.stopPropagation();
+      var open = navDrop.classList.toggle('open');
+      dToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  /* Burger -> abre/cierra el menú móvil */
+  if (burger && navMobile){
+    burger.addEventListener('click', function(){
+      var open = navMobile.classList.toggle('open');
+      burger.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      navMobile.setAttribute('aria-hidden', open ? 'false' : 'true');
+    });
+  }
+
+  /* Acordeón "Mis propuestas" dentro del menú móvil */
+  if (navMDrop){
+    var mToggle = navMDrop.querySelector('.nav__mdrop-toggle');
+    if (mToggle) mToggle.addEventListener('click', function(){
+      var open = navMDrop.classList.toggle('open');
+      mToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  /* Los enlaces normales del menú móvil cierran el panel al pulsar */
+  if (navMobile){
+    navMobile.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(){ closeMobileMenu(); });
+    });
+  }
+
+  /* Cerrar al pulsar fuera o con Escape */
+  document.addEventListener('click', function(e){
+    if (navDrop && !navDrop.contains(e.target)) closeDesktopDrop();
+    if (navMobile && navMobile.classList.contains('open') &&
+        !navMobile.contains(e.target) && burger && !burger.contains(e.target)) closeMobileMenu();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape'){ closeDesktopDrop(); closeMobileMenu(); }
+  });
 
 })();
 </script>
