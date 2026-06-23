@@ -505,6 +505,49 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
 .chat__foot button:hover{background:var(--gold2)}
 .fab img{width:32px;height:32px;object-fit:contain;border-radius:4px}
 
+/* ---------- Chatbot: flujo guiado de reserva (calendario + widgets) ---------- */
+.msg{white-space:pre-line}
+.chat-widget{align-self:stretch;animation:msgin .4s ease}
+.chat-widget.used{opacity:.7;pointer-events:none}
+.chat-widget.used button:disabled,.chat-widget.used input:disabled{opacity:.6}
+/* Calendario inline */
+.cal{max-width:280px;margin:0 auto;background:#1A0000;border:1px solid rgba(204,0,0,.2);border-radius:12px;padding:.9rem}
+.cal__head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.7rem}
+.cal__title{font-family:var(--serif);font-size:1.05rem;color:var(--text)}
+.cal__nav{width:28px;height:28px;border-radius:50%;border:1px solid rgba(204,0,0,.25);background:transparent;color:var(--text);cursor:pointer;font-size:1rem;line-height:1;display:flex;align-items:center;justify-content:center;transition:.2s}
+.cal__nav:hover:not(:disabled){background:rgba(204,0,0,.3)}
+.cal__nav:disabled{opacity:.3;cursor:not-allowed}
+.cal__dow{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:.3rem}
+.cal__dow span{text-align:center;font-size:.62rem;letter-spacing:.05em;color:var(--muted);text-transform:uppercase;padding:.2rem 0}
+.cal__grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.cal__day{aspect-ratio:1;border:1px solid transparent;border-radius:6px;background:transparent;color:var(--text);font-family:var(--sans);font-size:.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .18s ease}
+.cal__day.is-empty{visibility:hidden;cursor:default}
+.cal__day:hover:not(:disabled):not(.is-selected){background:rgba(204,0,0,.3)}
+.cal__day.is-disabled{color:#5a4a4a;cursor:not-allowed}
+.cal__day.is-today{border-color:var(--gold)}
+.cal__day.is-selected{background:#CC0000;color:#fff;border-color:#CC0000}
+/* Servicio almuerzo/cena */
+.flow-svc{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.flow-svc button{display:flex;flex-direction:column;align-items:center;gap:.35rem;padding:1rem .5rem;border:1px solid rgba(204,0,0,.25);border-radius:10px;background:#1A0000;color:var(--text);font-size:1.6rem;cursor:pointer;transition:.2s}
+.flow-svc button span{font-family:var(--sans);font-size:.85rem}
+.flow-svc button:hover:not(:disabled){background:rgba(204,0,0,.3)}
+.flow-svc button.is-selected{background:#CC0000;border-color:#CC0000;color:#fff}
+/* Opciones (comensales, cocina) */
+.flow-opts{display:flex;flex-wrap:wrap;gap:.5rem}
+.flow-opts button{border:1px solid rgba(204,0,0,.25);background:#1A0000;color:var(--text);font-family:var(--sans);font-size:.85rem;padding:.55rem .95rem;border-radius:20px;cursor:pointer;transition:.2s}
+.flow-opts button:hover:not(:disabled){background:rgba(204,0,0,.3)}
+.flow-opts button.is-selected{background:#CC0000;border-color:#CC0000;color:#fff}
+/* Inputs del flujo */
+.flow-input{display:flex;gap:.5rem}
+.flow-input input,.flow-form input{flex:1;background:#1A0000;border:1px solid rgba(204,0,0,.25);border-radius:10px;padding:.7rem .9rem;color:var(--text);font-family:var(--sans);font-size:.88rem}
+.flow-input input:focus,.flow-form input:focus{outline:none;border-color:var(--gold)}
+.flow-go{width:42px;border:none;border-radius:10px;background:var(--gold);color:#fff;cursor:pointer;font-size:1.1rem;flex:0 0 auto}
+.flow-go:hover{background:var(--gold2)}
+.flow-form{display:flex;flex-direction:column;gap:.5rem}
+.flow-submit{border:none;border-radius:10px;background:var(--gold);color:#fff;font-family:var(--sans);font-weight:500;padding:.75rem;cursor:pointer;transition:.2s}
+.flow-submit:hover{background:var(--gold2)}
+.flow-err{color:#ff8b6a;font-size:.78rem;min-height:1em}
+
 /* ---------- Galería (masonry) ---------- */
 .galeria{background:var(--bg)}
 .gallery{column-count:3;column-gap:1.1rem}
@@ -1003,7 +1046,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
   </div>
   <div class="chat__body" id="chatBody"></div>
   <div class="chat__quick" id="chatQuick">
-    <button data-q="Quiero reservar una experiencia">Reservar experiencia</button>
+    <button data-flow="reserva" data-q="Quiero reservar una experiencia">Reservar experiencia</button>
     <button data-q="¿Qué menús y cocinas ofrecéis?">Ver menús</button>
     <button data-q="Cuéntame sobre el bono regalo">Bono regalo</button>
     <button data-q="¿Cómo funcionan los precios y la disponibilidad?">Precios y disponibilidad</button>
@@ -1262,7 +1305,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
       greeted = true;
       setTimeout(function(){
         addMsg('bot', 'Bienvenido a Chefka Experience. Soy Elena. ¿En qué puedo ayudarle?');
-      }, 800);
+      }, 2000);
     }
   }
   function closeChat(){ chat.classList.remove('open'); }
@@ -1285,6 +1328,192 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
     chatBody.appendChild(d);
     chatBody.scrollTop = chatBody.scrollHeight;
     return d;
+  }
+
+  /* ---------- Flujo guiado de reserva (calendario + servicio + datos) ---------- */
+  var MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  var DOW = ['L','M','X','J','V','S','D'];
+  var reserva = null;
+  var flowActive = false;
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+
+  function botSay(text, after){               /* "escribiendo…" y luego el mensaje */
+    var t = typing();
+    setTimeout(function(){ t.remove(); addMsg('bot', text); if (after) after(); }, 700);
+  }
+  function addWidget(){                        /* contenedor de widget (no burbuja) */
+    var w = document.createElement('div');
+    w.className = 'chat-widget';
+    chatBody.appendChild(w);
+    chatBody.scrollTop = chatBody.scrollHeight;
+    return w;
+  }
+  function lockWidget(w){
+    w.classList.add('used');
+    w.querySelectorAll('button,input').forEach(function(el){ el.disabled = true; });
+  }
+
+  function startReserva(){
+    if (flowActive) return;
+    flowActive = true;
+    reserva = { fecha:'', fechaISO:'', servicio:'', personas:'', localidad:'', cocina:'', nombre:'', telefono:'' };
+    addMsg('user', 'Reservar experiencia');
+    botSay('Perfecto. ¿Para qué fecha le gustaría la experiencia?', stepFecha);
+  }
+
+  function stepFecha(){
+    var w = addWidget();
+    var today = new Date(); today.setHours(0,0,0,0);
+    var view = { y: today.getFullYear(), m: today.getMonth() };
+    function render(){
+      var startOffset = (new Date(view.y, view.m, 1).getDay() + 6) % 7;  /* lunes primero */
+      var daysInMonth = new Date(view.y, view.m + 1, 0).getDate();
+      var atCurrent = (view.y === today.getFullYear() && view.m === today.getMonth());
+      var h = '<div class="cal"><div class="cal__head">'
+        + '<button type="button" class="cal__nav" data-nav="-1"' + (atCurrent ? ' disabled' : '') + '>‹</button>'
+        + '<span class="cal__title">' + MESES[view.m] + ' ' + view.y + '</span>'
+        + '<button type="button" class="cal__nav" data-nav="1">›</button></div>';
+      h += '<div class="cal__dow">' + DOW.map(function(d){ return '<span>' + d + '</span>'; }).join('') + '</div>';
+      h += '<div class="cal__grid">';
+      for (var i = 0; i < startOffset; i++) h += '<span class="cal__day is-empty"></span>';
+      for (var d = 1; d <= daysInMonth; d++){
+        var date = new Date(view.y, view.m, d);
+        var past = date < today;
+        var isToday = date.getTime() === today.getTime();
+        var cls = 'cal__day' + (past ? ' is-disabled' : '') + (isToday ? ' is-today' : '');
+        h += '<button type="button" class="' + cls + '"' + (past ? ' disabled' : ' data-day="' + d + '"') + '>' + d + '</button>';
+      }
+      h += '</div></div>';
+      w.innerHTML = h;
+      w.querySelectorAll('[data-nav]').forEach(function(b){
+        b.addEventListener('click', function(){
+          view.m += parseInt(b.getAttribute('data-nav'), 10);
+          if (view.m < 0){ view.m = 11; view.y--; }
+          if (view.m > 11){ view.m = 0; view.y++; }
+          render();
+        });
+      });
+      w.querySelectorAll('[data-day]').forEach(function(b){
+        b.addEventListener('click', function(){
+          var d = parseInt(b.getAttribute('data-day'), 10);
+          reserva.fechaISO = view.y + '-' + pad(view.m + 1) + '-' + pad(d);
+          reserva.fecha = pad(d) + '/' + pad(view.m + 1) + '/' + view.y;
+          lockWidget(w);
+          b.classList.add('is-selected');
+          addMsg('user', reserva.fecha);
+          botSay('¿Prefiere almuerzo o cena?', stepServicio);
+        });
+      });
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+    render();
+  }
+
+  function stepServicio(){
+    var w = addWidget();
+    w.innerHTML = '<div class="flow-svc">'
+      + '<button type="button" data-svc="Almuerzo">🌞<span>Almuerzo</span></button>'
+      + '<button type="button" data-svc="Cena">🌙<span>Cena</span></button></div>';
+    w.querySelectorAll('[data-svc]').forEach(function(b){
+      b.addEventListener('click', function(){
+        reserva.servicio = b.getAttribute('data-svc');
+        lockWidget(w); b.classList.add('is-selected');
+        addMsg('user', reserva.servicio);
+        botSay('¿Cuántos comensales serán?', stepPersonas);
+      });
+    });
+  }
+
+  function stepPersonas(){
+    var w = addWidget();
+    w.innerHTML = '<div class="flow-opts">' + ['2','4','6','8','+10'].map(function(o){
+      return '<button type="button" data-n="' + o + '">' + o + '</button>';
+    }).join('') + '</div>';
+    w.querySelectorAll('[data-n]').forEach(function(b){
+      b.addEventListener('click', function(){
+        reserva.personas = b.getAttribute('data-n');
+        lockWidget(w); b.classList.add('is-selected');
+        addMsg('user', reserva.personas + ' comensales');
+        botSay('¿En qué localidad se celebrará el evento?', stepLocalidad);
+      });
+    });
+  }
+
+  function stepLocalidad(){
+    var w = addWidget();
+    w.innerHTML = '<div class="flow-input"><input type="text" placeholder="Ej. Majadahonda, Madrid" /><button type="button" class="flow-go" aria-label="Continuar">→</button></div>';
+    var input = w.querySelector('input'), go = w.querySelector('.flow-go');
+    function submit(){
+      var v = input.value.trim(); if (!v) return;
+      reserva.localidad = v; lockWidget(w);
+      addMsg('user', v);
+      botSay('¿Qué tipo de cocina le interesa?', stepCocina);
+    }
+    go.addEventListener('click', submit);
+    input.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); submit(); } });
+    setTimeout(function(){ input.focus(); }, 50);
+  }
+
+  function stepCocina(){
+    var w = addWidget();
+    w.innerHTML = '<div class="flow-opts">' + ['Mediterránea','Japonesa','Italiana','Mexicana','Francesa'].map(function(c){
+      return '<button type="button" data-c="' + c + '">' + c + '</button>';
+    }).join('') + '</div>';
+    w.querySelectorAll('[data-c]').forEach(function(b){
+      b.addEventListener('click', function(){
+        reserva.cocina = b.getAttribute('data-c');
+        lockWidget(w); b.classList.add('is-selected');
+        addMsg('user', reserva.cocina);
+        botSay('Por último, ¿me facilita su nombre y número de teléfono?', stepContacto);
+      });
+    });
+  }
+
+  function stepContacto(){
+    var w = addWidget();
+    w.innerHTML = '<div class="flow-form">'
+      + '<input type="text" data-f="nombre" placeholder="Su nombre" autocomplete="name" />'
+      + '<input type="tel" data-f="telefono" placeholder="Su teléfono" autocomplete="tel" inputmode="tel" />'
+      + '<button type="button" class="flow-submit">Enviar solicitud</button>'
+      + '<div class="flow-err" aria-live="polite"></div></div>';
+    var nombre = w.querySelector('[data-f="nombre"]'), tel = w.querySelector('[data-f="telefono"]');
+    var btn = w.querySelector('.flow-submit'), err = w.querySelector('.flow-err');
+    function submit(){
+      var n = nombre.value.trim(), t = tel.value.trim();
+      if (!n){ err.textContent = 'Por favor, indique su nombre.'; return; }
+      if (t.replace(/\D/g, '').length < 9){ err.textContent = 'Indique un teléfono válido.'; return; }
+      reserva.nombre = n; reserva.telefono = t;
+      lockWidget(w);
+      addMsg('user', n + ' · ' + t);
+      finishReserva();
+    }
+    btn.addEventListener('click', submit);
+    tel.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); submit(); } });
+    setTimeout(function(){ nombre.focus(); }, 50);
+  }
+
+  function finishReserva(){
+    var resumen = 'Fecha: ' + reserva.fecha + ' | Servicio: ' + reserva.servicio +
+                  ' | Personas: ' + reserva.personas + ' | Cocina: ' + reserva.cocina +
+                  ' | Localidad: ' + reserva.localidad;
+    saveLead({
+      nombre:reserva.nombre, telefono:reserva.telefono, email:'',
+      sector:'hosteleria-chef', interes:'chefka-experience',
+      mensaje:'Reserva guiada Elena | ' + resumen,
+      origen:'chefka-experience-chat', fecha:new Date().toISOString()
+    });
+    /* chefka-notify imprime "Servicio"; incluimos la cocina ahí para que también
+       aparezca en el WhatsApp del chef (el back-end no se toca). */
+    notifyWhatsApp({
+      nombre:reserva.nombre, telefono:reserva.telefono, fecha:reserva.fecha,
+      personas:reserva.personas, servicio:reserva.servicio + ' · ' + reserva.cocina,
+      cocina:reserva.cocina, localidad:reserva.localidad
+    });
+    leadDone = true;
+    botSay('Gracias, ' + reserva.nombre + '. Su solicitud ha sido registrada correctamente.\n\n' +
+           'El chef Javier Checa se pondrá en contacto con usted para verificar la disponibilidad de la fecha seleccionada y poder brindarle un servicio Premium personalizado.\n\n' +
+           'Hasta pronto.');
+    flowActive = false;
   }
 
   function handleLeadMarker(text){
@@ -1336,6 +1565,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
   chatInput.addEventListener('keydown', function(e){ if(e.key==='Enter'){ send(chatInput.value.trim()); } });
   chatQuick.addEventListener('click', function(e){
     var b = e.target.closest('button'); if(!b) return;
+    if (b.getAttribute('data-flow') === 'reserva'){ startReserva(); return; }
     send(b.getAttribute('data-q'));
   });
 
