@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chef Privado a Domicilio · Chefka Experience</title>
+<meta name="description" content="Experiencia gastronómica de autor en tu propio hogar. Chef Javier Checa. Alta cocina a domicilio en Madrid: mediterránea, japonesa, italiana, mexicana y francesa." />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Chef Privado a Domicilio · Chefka Experience" />
+<meta property="og:description" content="Experiencia gastronómica de autor en tu propio hogar. Chef Javier Checa. Madrid." />
+<meta property="og:image" content="https://chefkaexperience.com/wp-content/uploads/lomo-bonito-fondo.jpg" />
+<meta property="og:locale" content="es_ES" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#0A0806" />
+<link rel="icon" href="https://chefkaexperience.com/wp-content/uploads/2019/01/javierchecachef-logo.png" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+<!-- Locomotive Scroll CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css" />
+
+<!-- Schema JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FoodEstablishment",
+  "name": "Chefka Experience",
+  "image": "https://chefkaexperience.com/wp-content/uploads/lomo-bonito-fondo.jpg",
+  "description": "Chef privado a domicilio. Alta cocina de autor en tu propia casa. Chef Javier Checa, Madrid.",
+  "servesCuisine": ["Mediterránea", "Japonesa Fusión", "Italiana Siciliana", "Mexicana Acapulqueña", "Francesa"],
+  "telephone": "+34660693887",
+  "email": "info@chefkaexperience.com",
+  "url": "https://chefkaexperience.com",
+  "priceRange": "€€€",
+  "areaServed": "Madrid",
+  "founder": { "@type": "Person", "name": "Javier Checa" },
+  "sameAs": [
+    "https://www.instagram.com/chefkaexperience",
+    "https://www.facebook.com/chefkaexperience"
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "reviewCount": "62"
+  }
+}
+</script>
+
+<style>
+:root{
+  --bg:#0A0806;
+  --bg2:#100E0B;
+  --card:#161310;
+  --gold:#C9A84C;
+  --gold2:#E8C96A;
+  --text:#F5F0E8;
+  --muted:#8A8070;
+  --border:rgba(201,168,76,0.18);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --maxw:1280px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+html.has-scroll-smooth{overflow:hidden}
+html.has-scroll-smooth body{overflow:hidden}
+.has-scroll-smooth [data-scroll-container]{min-height:100vh}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  font-weight:300;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+::selection{background:var(--gold);color:var(--bg)}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 6vw}
+.serif{font-family:var(--serif)}
+.gold{color:var(--gold)}
+.eyebrow{
+  font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--gold);font-weight:500;
+}
+
+/* ---------- Custom cursor ---------- */
+.cursor{
+  position:fixed;top:0;left:0;width:20px;height:20px;border-radius:50%;
+  border:1px solid var(--gold2);pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);mix-blend-mode:difference;
+  transition:width .25s ease,height .25s ease,background .25s ease;
+  will-change:transform;
+}
+.cursor.is-active{width:54px;height:54px;background:rgba(232,201,106,.15)}
+@media (hover:none),(max-width:900px){.cursor{display:none}}
+
+/* ---------- Nav ---------- */
+.nav{
+  position:fixed;top:0;left:0;width:100%;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.5rem 6vw;
+  transition:background .5s ease,padding .5s ease,backdrop-filter .5s ease;
+}
+.nav::after{
+  content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  transform:scaleX(0);opacity:0;transition:.6s ease;
+}
+.nav.scrolled{
+  background:rgba(10,8,6,.82);backdrop-filter:blur(14px);
+  padding:.9rem 6vw;
+}
+.nav.scrolled::after{transform:scaleX(1);opacity:.55}
+.nav__logo img{height:42px;width:auto;filter:brightness(0) invert(1);opacity:.92}
+.nav__links{display:flex;gap:2.4rem;align-items:center}
+.nav__links a{
+  font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  position:relative;transition:color .3s ease;
+}
+.nav__links a::after{
+  content:"";position:absolute;left:0;bottom:-6px;width:100%;height:1px;
+  background:var(--gold);transform:scaleX(0);transform-origin:left;transition:.35s ease;
+}
+.nav__links a:hover{color:var(--text)}
+.nav__links a:hover::after{transform:scaleX(1)}
+.nav__cta{
+  border:1px solid var(--border);padding:.55rem 1.2rem;border-radius:2px;
+  color:var(--gold2)!important;
+}
+.nav__cta:hover{background:var(--gold);color:var(--bg)!important;border-color:var(--gold)}
+.nav__burger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.nav__burger span{width:26px;height:1.5px;background:var(--text)}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;height:100vh;min-height:680px;overflow:hidden;display:flex;align-items:center}
+.hero__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero__overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(rgba(10,8,6,.55),rgba(10,8,6,.82));
+}
+.hero__ghost{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:var(--serif);font-weight:600;font-size:20vw;line-height:1;
+  color:var(--text);opacity:.03;z-index:1;pointer-events:none;white-space:nowrap;
+  letter-spacing:-.02em;
+}
+.hero__inner{position:relative;z-index:3;width:100%;padding:0 6vw}
+.hero__badge{
+  display:inline-flex;align-items:center;gap:.6rem;margin-bottom:2rem;
+  font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);
+  border:1px solid var(--border);border-radius:40px;padding:.4rem 1rem;
+  background:rgba(201,168,76,.04);
+}
+.hero__badge .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);
+  box-shadow:0 0 0 0 rgba(201,168,76,.7);animation:pulse 2.2s infinite}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(201,168,76,.6)}
+  70%{box-shadow:0 0 0 10px rgba(201,168,76,0)}
+  100%{box-shadow:0 0 0 0 rgba(201,168,76,0)}
+}
+.hero h1{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(3.4rem,8vw,5rem);line-height:1.02;letter-spacing:-.01em;
+  margin-bottom:1.4rem;
+}
+.hero h1 .l2{display:block;font-style:italic;color:var(--gold2);font-weight:400}
+.hero h1 .word{display:inline-block;will-change:transform,opacity}
+.hero__sub{
+  font-size:clamp(.85rem,1.4vw,1rem);letter-spacing:.28em;text-transform:uppercase;
+  color:var(--muted);font-weight:300;margin-bottom:.8rem;
+}
+.hero__rotor{margin:1.6rem 0 2.4rem;font-family:var(--serif);font-size:clamp(1.4rem,3vw,2rem);color:var(--text)}
+.hero__rotor .rot{color:var(--gold2);font-style:italic}
+.hero__cta{
+  display:inline-flex;align-items:center;gap:.7rem;
+  background:var(--gold);color:var(--bg);font-weight:500;
+  padding:1rem 2.1rem;border-radius:3px;font-size:.92rem;letter-spacing:.04em;
+  transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s ease,box-shadow .35s ease;
+  box-shadow:0 10px 40px -12px rgba(201,168,76,.5);
+}
+.hero__cta:hover{background:var(--gold2);transform:translateY(-3px);box-shadow:0 18px 50px -12px rgba(201,168,76,.6)}
+.hero__cta .arr{transition:transform .35s ease}
+.hero__cta:hover .arr{transform:translateX(5px)}
+
+.hero__stats{
+  position:absolute;bottom:7%;left:6vw;right:6vw;z-index:3;
+  display:flex;gap:1px;flex-wrap:wrap;
+  border:1px solid var(--border);border-radius:6px;overflow:hidden;
+  background:rgba(255,255,255,.02);backdrop-filter:blur(10px);
+}
+.hero__stat{flex:1;min-width:130px;padding:1.3rem 1.6rem;background:rgba(10,8,6,.25)}
+.hero__stat b{display:block;font-family:var(--serif);font-size:2rem;font-weight:500;color:var(--gold2)}
+.hero__stat span{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.scrollcue{
+  position:absolute;bottom:7%;left:50%;transform:translateX(-50%);z-index:3;
+  display:flex;flex-direction:column;align-items:center;gap:.6rem;color:var(--muted);
+}
+.scrollcue .line{width:1px;height:46px;background:linear-gradient(var(--gold),transparent);position:relative;overflow:hidden}
+.scrollcue .line::after{content:"";position:absolute;top:-50%;left:0;width:100%;height:50%;background:var(--gold2);animation:cue 1.8s ease-in-out infinite}
+@keyframes cue{0%{top:-50%}100%{top:100%}}
+.scrollcue span{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase}
+
+/* ---------- Sections ---------- */
+section{position:relative}
+.sec{padding:9rem 0}
+.sec__head{max-width:640px;margin-bottom:5rem}
+.sec__head h2{
+  font-family:var(--serif);font-weight:300;font-size:clamp(2.4rem,5vw,3.6rem);
+  line-height:1.08;margin:1rem 0;letter-spacing:-.01em;
+}
+.sec__head h2 em{font-style:italic;color:var(--gold2)}
+
+/* Reveal (IntersectionObserver) */
+.rv{opacity:0;transform:translateY(34px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+.rv-l{opacity:0;transform:translateX(-60px);transition:opacity 1.1s cubic-bezier(.16,1,.3,1),transform 1.1s cubic-bezier(.16,1,.3,1)}
+.rv-l.in{opacity:1;transform:none}
+.rv-r{opacity:0;transform:translateX(60px);transition:opacity 1.1s cubic-bezier(.16,1,.3,1),transform 1.1s cubic-bezier(.16,1,.3,1)}
+.rv-r.in{opacity:1;transform:none}
+
+/* ---------- Proceso ---------- */
+.proceso{background:var(--bg2)}
+.proc{position:relative;display:flex;flex-direction:column;gap:7rem}
+.proc__line{
+  position:absolute;left:50%;top:0;bottom:0;width:1px;
+  background:linear-gradient(var(--border),var(--gold),var(--border));
+  transform:translateX(-50%);
+}
+.step{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:4rem;position:relative}
+.step__num{font-family:var(--serif);font-weight:200;font-size:clamp(7rem,11vw,9rem);line-height:.8;color:var(--gold);opacity:.85}
+.step__body h3{font-family:var(--serif);font-size:1.9rem;font-weight:400;margin-bottom:1rem}
+.step__body p{color:var(--muted);max-width:38ch}
+.step.right .step__num{order:2;text-align:right}
+.step.right .step__body{order:1;text-align:right}
+.step.right .step__body p{margin-left:auto}
+.step.center{grid-template-columns:1fr;text-align:center;justify-items:center}
+.step.center .step__deco{width:1px;height:60px;background:linear-gradient(var(--gold),transparent);margin-bottom:1.5rem}
+.step.center .step__body p{margin:0 auto}
+
+/* ---------- Cocinas ---------- */
+.cocinas{background:var(--bg)}
+.grid-coc{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:300px;gap:1.2rem}
+.coc{
+  position:relative;overflow:hidden;border-radius:6px;border:1px solid var(--border);
+  display:flex;align-items:flex-end;cursor:pointer;
+}
+.coc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.16,1,.3,1);z-index:0}
+.coc::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(transparent 35%,rgba(10,8,6,.9));transition:.5s ease}
+.coc::after{content:"";position:absolute;inset:0;z-index:1;background:radial-gradient(circle at 50% 120%,rgba(201,168,76,.32),transparent 60%);opacity:0;transition:.6s ease}
+.coc:hover img{transform:scale(1.06)}
+.coc:hover::after{opacity:1}
+.coc__cap{position:relative;z-index:2;padding:1.8rem}
+.coc__cap .k{font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold2)}
+.coc__cap h3{font-family:var(--serif);font-size:1.7rem;font-weight:400;margin-top:.3rem}
+.coc--med{grid-column:span 2;grid-row:span 2}
+.coc--jap{grid-column:3;grid-row:span 2}
+.coc--ita{grid-column:span 1;grid-row:span 1}
+.coc--mex{grid-column:span 2;grid-row:span 1}
+.coc--fra{grid-column:span 3;grid-row:span 1;align-items:center;justify-content:center;text-align:center}
+.coc--fra .coc__cap{text-align:center}
+
+/* ---------- El Chef ---------- */
+.chef{background:var(--bg2)}
+.chef__grid{display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:center}
+.counters{display:flex;flex-direction:column;gap:2.6rem}
+.counter b{font-family:var(--serif);font-size:clamp(3.4rem,6vw,4.6rem);font-weight:300;color:var(--gold2);line-height:1}
+.counter span{display:block;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:.4rem}
+.chef__text p{font-family:var(--serif);font-size:clamp(1.4rem,2.4vw,1.9rem);font-weight:300;line-height:1.5;color:var(--text)}
+.chef__text p .gold{font-style:italic}
+.chef__text .sign{margin-top:2rem;font-family:var(--serif);font-style:italic;font-size:1.5rem;color:var(--muted)}
+
+/* ---------- Bono ---------- */
+.bono{position:relative;min-height:560px;display:flex;align-items:center;overflow:hidden}
+.bono__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.bono__ov{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(10,8,6,.92),rgba(10,8,6,.55))}
+.bono__inner{position:relative;z-index:2;max-width:560px}
+.bono h2{font-family:var(--serif);font-weight:300;font-size:clamp(2.4rem,4.6vw,3.4rem);line-height:1.08;margin:1rem 0 1.4rem}
+.bono p{color:var(--text);opacity:.85;margin-bottom:2.2rem;max-width:44ch}
+.btn-gold{
+  display:inline-flex;align-items:center;gap:.7rem;background:var(--gold);color:var(--bg);
+  font-weight:500;padding:.95rem 2rem;border-radius:3px;font-size:.9rem;
+  transition:transform .35s cubic-bezier(.16,1,.3,1),background .35s ease;
+}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-3px)}
+.btn-gold .arr{transition:transform .35s ease}
+.btn-gold:hover .arr{transform:translateX(5px)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.7rem;border:1px solid var(--border);color:var(--gold2);
+  font-weight:400;padding:.95rem 2rem;border-radius:3px;font-size:.9rem;transition:.35s ease;
+}
+.btn-ghost:hover{background:rgba(201,168,76,.08);border-color:var(--gold)}
+
+/* ---------- Reseñas ---------- */
+.resenas{background:var(--bg);padding:9rem 0;overflow:hidden}
+.ticker{display:flex;gap:1.6rem;width:max-content;animation:ticker 60s linear infinite}
+.ticker:hover{animation-play-state:paused}
+.tk-mask{position:relative}
+.tk-mask::before,.tk-mask::after{content:"";position:absolute;top:0;bottom:0;width:14vw;z-index:2;pointer-events:none}
+.tk-mask::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
+.tk-mask::after{right:0;background:linear-gradient(270deg,var(--bg),transparent)}
+@keyframes ticker{to{transform:translateX(-50%)}}
+.review{
+  width:380px;flex:0 0 380px;background:var(--card);border:1px solid var(--border);
+  border-radius:8px;padding:2rem;display:flex;flex-direction:column;gap:1rem;
+}
+.review .stars{color:var(--gold2);letter-spacing:3px;font-size:.9rem}
+.review p{color:var(--muted);font-size:.95rem;line-height:1.65;flex:1}
+.review .name{font-family:var(--serif);font-size:1.15rem;color:var(--text)}
+
+/* ---------- Formulario ---------- */
+.form-sec{background:var(--bg2);padding:9rem 0}
+.form-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:start}
+.form-aside h2{font-family:var(--serif);font-weight:300;font-size:clamp(2.4rem,4.4vw,3.4rem);line-height:1.08;margin:1rem 0 1.4rem}
+.form-aside p{color:var(--muted);margin-bottom:2rem;max-width:36ch}
+.form-aside .meta{display:flex;flex-direction:column;gap:1rem;border-top:1px solid var(--border);padding-top:1.8rem}
+.form-aside .meta a{display:flex;align-items:center;gap:.8rem;color:var(--text);font-size:.95rem}
+.form-aside .meta .k{color:var(--gold2)}
+form .row{display:grid;gap:1.1rem;margin-bottom:1.1rem}
+form .row.c3{grid-template-columns:repeat(3,1fr)}
+form .row.c2{grid-template-columns:repeat(2,1fr)}
+.field{display:flex;flex-direction:column;gap:.5rem}
+.field label{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.field input,.field select,.field textarea{
+  background:var(--bg);border:1px solid var(--border);border-radius:4px;
+  padding:.85rem 1rem;color:var(--text);font-family:var(--sans);font-size:.95rem;
+  transition:border-color .3s ease,box-shadow .3s ease;
+}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.12)
+}
+.field select{appearance:none;cursor:pointer}
+.field textarea{resize:vertical;min-height:90px}
+.check{display:flex;align-items:flex-start;gap:.7rem;margin:.4rem 0 1.4rem;font-size:.82rem;color:var(--muted)}
+.check input{margin-top:.2rem;accent-color:var(--gold)}
+.submit{
+  width:100%;background:var(--gold);color:var(--bg);border:none;cursor:pointer;
+  padding:1.1rem;border-radius:4px;font-family:var(--sans);font-weight:500;font-size:1rem;
+  letter-spacing:.03em;transition:background .35s ease,transform .35s ease;
+}
+.submit:hover:not(:disabled){background:var(--gold2);transform:translateY(-2px)}
+.submit:disabled{opacity:.6;cursor:not-allowed}
+.form-msg{margin-top:1rem;font-size:.9rem;min-height:1.2em}
+.form-msg.ok{color:var(--gold2)}
+.form-msg.err{color:#e98b6a}
+
+/* ---------- Footer ---------- */
+.footer{background:var(--bg);border-top:1px solid var(--border);padding:5rem 0 3rem}
+.footer__grid{display:flex;justify-content:space-between;align-items:flex-start;gap:3rem;flex-wrap:wrap}
+.footer__logo img{height:54px;filter:brightness(0) invert(1);opacity:.9;margin-bottom:1.2rem}
+.footer__tag{font-family:var(--serif);font-style:italic;font-size:1.6rem;color:var(--gold2)}
+.footer__col h4{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.footer__col a{display:block;color:var(--text);opacity:.85;margin-bottom:.6rem;font-size:.95rem;transition:color .3s}
+.footer__col a:hover{color:var(--gold2);opacity:1}
+.footer__btm{margin-top:3.5rem;padding-top:1.8rem;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;color:var(--muted);font-size:.8rem}
+.footer__btm a{color:var(--gold2)}
+
+/* ---------- Chatbot ---------- */
+.fab{
+  position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;
+  background:var(--gold);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:950;box-shadow:0 12px 36px -8px rgba(201,168,76,.6);
+  transition:transform .35s cubic-bezier(.16,1,.3,1);
+}
+.fab:hover{transform:scale(1.08)}
+.fab svg{width:26px;height:26px;color:var(--bg)}
+.fab .ping{position:absolute;inset:0;border-radius:50%;border:1px solid var(--gold);animation:fabping 2.4s ease-out infinite}
+@keyframes fabping{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.6);opacity:0}}
+.chat{
+  position:fixed;bottom:92px;right:24px;width:380px;max-width:calc(100vw - 32px);
+  height:560px;max-height:calc(100vh - 120px);background:var(--bg2);
+  border:1px solid rgba(201,168,76,.2);border-radius:16px;z-index:951;
+  display:flex;flex-direction:column;overflow:hidden;
+  opacity:0;transform:translateY(20px) scale(.97);pointer-events:none;
+  transition:opacity .35s ease,transform .35s cubic-bezier(.16,1,.3,1);
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.7);
+}
+.chat.open{opacity:1;transform:none;pointer-events:auto}
+.chat__head{display:flex;align-items:center;gap:.8rem;padding:1.1rem 1.2rem;border-bottom:1px solid var(--border);background:rgba(201,168,76,.04)}
+.chat__av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));
+  display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.3rem;color:var(--bg);font-weight:600}
+.chat__id b{font-family:var(--serif);font-size:1.05rem;font-weight:500;display:block}
+.chat__id span{font-size:.7rem;color:var(--muted);letter-spacing:.05em}
+.chat__close{margin-left:auto;color:var(--muted);cursor:pointer;font-size:1.3rem;line-height:1;padding:.2rem .4rem}
+.chat__close:hover{color:var(--text)}
+.chat__body{flex:1;overflow-y:auto;padding:1.2rem;display:flex;flex-direction:column;gap:.9rem;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.chat__body::-webkit-scrollbar{width:6px}
+.chat__body::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.msg{max-width:82%;padding:.7rem 1rem;border-radius:14px;font-size:.92rem;line-height:1.5;animation:msgin .4s ease}
+@keyframes msgin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.msg.bot{align-self:flex-start;background:var(--card);border:1px solid var(--border);border-bottom-left-radius:4px;color:var(--text)}
+.msg.user{align-self:flex-end;background:var(--gold);color:var(--bg);border-bottom-right-radius:4px}
+.msg.typing{display:flex;gap:4px}
+.msg.typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:typ 1.2s infinite}
+.msg.typing i:nth-child(2){animation-delay:.2s}
+.msg.typing i:nth-child(3){animation-delay:.4s}
+@keyframes typ{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+.chat__quick{display:flex;flex-wrap:wrap;gap:.5rem;padding:0 1.2rem .6rem}
+.chat__quick button{
+  background:rgba(201,168,76,.07);border:1px solid var(--border);color:var(--gold2);
+  font-family:var(--sans);font-size:.78rem;padding:.45rem .8rem;border-radius:20px;cursor:pointer;transition:.25s ease;
+}
+.chat__quick button:hover{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+.chat__foot{display:flex;gap:.6rem;padding:.9rem 1.2rem;border-top:1px solid var(--border)}
+.chat__foot input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:22px;padding:.7rem 1rem;color:var(--text);font-family:var(--sans);font-size:.9rem}
+.chat__foot input:focus{outline:none;border-color:var(--gold)}
+.chat__foot button{width:42px;height:42px;border-radius:50%;border:none;background:var(--gold);color:var(--bg);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s}
+.chat__foot button:hover{background:var(--gold2)}
+
+/* ---------- Responsive ---------- */
+@media(max-width:900px){
+  .nav__links{display:none}
+  .nav__burger{display:flex}
+  .hero__stats{position:static;margin-top:2rem}
+  .hero{height:auto;min-height:100vh;padding:120px 0 60px}
+  .scrollcue{display:none}
+  .step,.step.right{grid-template-columns:1fr;text-align:left;gap:1rem}
+  .step.right .step__num,.step.right .step__body{order:0;text-align:left}
+  .step.right .step__body p{margin-left:0}
+  .proc__line{display:none}
+  .grid-coc{grid-template-columns:1fr 1fr;grid-auto-rows:220px}
+  .coc--med{grid-column:span 2;grid-row:span 2}
+  .coc--jap{grid-column:span 1;grid-row:span 1}
+  .coc--mex,.coc--fra,.coc--ita{grid-column:span 2;grid-row:span 1}
+  .chef__grid,.form-grid{grid-template-columns:1fr;gap:3rem}
+  .counters{flex-direction:row;flex-wrap:wrap;gap:1.6rem}
+}
+@media(max-width:600px){
+  .sec{padding:6rem 0}
+  form .row.c3,form .row.c2{grid-template-columns:1fr}
+  .grid-coc{grid-template-columns:1fr;grid-auto-rows:200px}
+  .coc--med{grid-column:span 1;grid-row:span 1}
+  .chat{bottom:84px;height:70vh}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rv,.rv-l,.rv-r{opacity:1!important;transform:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a class="nav__logo" href="#top" data-cursor><img src="https://chefkaexperience.com/wp-content/uploads/2019/01/javierchecachef-logo.png" alt="Chefka Experience" /></a>
+  <div class="nav__links">
+    <a href="#cocinas" data-cursor>Menús</a>
+    <a href="#chef" data-cursor>El Chef</a>
+    <a href="#bono" data-cursor>Experiencias</a>
+    <a href="#formulario" class="nav__cta" data-cursor>Reservar</a>
+  </div>
+  <div class="nav__burger" id="burger"><span></span><span></span><span></span></div>
+</nav>
+
+<div data-scroll-container id="scroll">
+<main id="top">
+
+  <!-- HERO -->
+  <header class="hero" data-scroll-section>
+    <video class="hero__video" autoplay loop muted playsinline poster="https://chefkaexperience.com/wp-content/uploads/lomo-bonito-fondo.jpg" id="heroVideo">
+      <source src="https://chefkaexperience.com/wp-content/uploads/Lv-7445335435716349189-202501161302471.mp4" type="video/mp4" />
+      <source src="https://chefkaexperience.com/wp-content/uploads/By-20241120-192558-0001.mp4" type="video/mp4" />
+    </video>
+    <div class="hero__overlay" data-scroll data-scroll-speed="2"></div>
+    <div class="hero__ghost" aria-hidden="true">CHEFKA</div>
+
+    <div class="hero__inner">
+      <span class="hero__badge"><span class="dot"></span>Disponibilidad limitada</span>
+      <h1 id="heroTitle">
+        <span class="block" data-line>Alta Cocina</span>
+        <span class="l2" data-line>en Tu Propia Casa</span>
+      </h1>
+      <p class="hero__sub">Chef Privado · Javier Checa · Madrid</p>
+      <p class="hero__rotor">Cocina <span class="rot" id="rotor">Mediterránea</span></p>
+      <a href="#formulario" class="hero__cta" data-cursor>Reserva tu Experiencia <span class="arr">→</span></a>
+    </div>
+
+    <div class="hero__stats" id="heroStats">
+      <div class="hero__stat"><b>15+</b><span>años de oficio</span></div>
+      <div class="hero__stat"><b>5</b><span>cocinas de autor</span></div>
+      <div class="hero__stat"><b>62 ★</b><span>reseñas Google</span></div>
+      <div class="hero__stat"><b>500+</b><span>eventos servidos</span></div>
+    </div>
+    <div class="scrollcue"><div class="line"></div><span>scroll</span></div>
+  </header>
+
+  <!-- PROCESO -->
+  <section class="sec proceso" data-scroll-section>
+    <div class="wrap">
+      <div class="sec__head rv">
+        <span class="eyebrow">El método</span>
+        <h2>Tres pasos hacia <em>lo extraordinario</em></h2>
+      </div>
+      <div class="proc">
+        <div class="proc__line"></div>
+        <div class="step rv-l">
+          <div class="step__num">01</div>
+          <div class="step__body">
+            <h3>Contacto con el chef</h3>
+            <p>Hablas directamente con Javier Checa. Confirma disponibilidad para tu fecha y comienza a personalizar el menú contigo.</p>
+          </div>
+        </div>
+        <div class="step right rv-r">
+          <div class="step__num">02</div>
+          <div class="step__body">
+            <h3>Tu menú, desde cero</h3>
+            <p>Se confecciona un menú a medida, adaptado a tus gustos, a los de tus invitados y a tu presupuesto. Nada prefabricado.</p>
+          </div>
+        </div>
+        <div class="step center rv">
+          <div class="step__deco"></div>
+          <div class="step__num">03</div>
+          <div class="step__body">
+            <h3>El chef llega a ti</h3>
+            <p>Javier y su equipo se desplazan al lugar y día indicados. Cocinan, sirven y dejan tu cocina impecable.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COCINAS -->
+  <section class="sec cocinas" id="cocinas" data-scroll-section>
+    <div class="wrap">
+      <div class="sec__head rv">
+        <span class="eyebrow">Las cocinas</span>
+        <h2>Cinco mundos. <em>Un solo chef.</em></h2>
+      </div>
+      <div class="grid-coc rv">
+        <div class="coc coc--med" data-cursor>
+          <img src="https://chefkaexperience.com/wp-content/uploads/menu-mediterraneo-chef.jpg" alt="Cocina Mediterránea" loading="lazy" />
+          <div class="coc__cap"><div class="k">01 — Raíz</div><h3>Mediterránea</h3></div>
+        </div>
+        <div class="coc coc--jap" data-cursor>
+          <img src="https://chefkaexperience.com/wp-content/uploads/menu-tematico-oriental-fusion.jpg" alt="Cocina Japonesa Fusión" loading="lazy" />
+          <div class="coc__cap"><div class="k">02 — Precisión</div><h3>Japonesa Fusión</h3></div>
+        </div>
+        <div class="coc coc--ita" data-cursor>
+          <img src="https://chefkaexperience.com/wp-content/uploads/menu-tematico-italiano.jpg" alt="Cocina Italiana Siciliana" loading="lazy" />
+          <div class="coc__cap"><div class="k">03 — Alma</div><h3>Italiana Siciliana</h3></div>
+        </div>
+        <div class="coc coc--mex" data-cursor>
+          <img src="https://chefkaexperience.com/wp-content/uploads/menus-tematicos.jpg" alt="Cocina Mexicana Acapulqueña" loading="lazy" />
+          <div class="coc__cap"><div class="k">04 — Fuego</div><h3>Mexicana Acapulqueña</h3></div>
+        </div>
+        <div class="coc coc--fra" data-cursor>
+          <img src="https://chefkaexperience.com/wp-content/uploads/18304232_presentation-wide_normal_none-360x255.jpg" alt="Cocina Francesa" loading="lazy" />
+          <div class="coc__cap"><div class="k">05 — Elegancia</div><h3>Francesa</h3></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EL CHEF -->
+  <section class="sec chef" id="chef" data-scroll-section>
+    <div class="wrap">
+      <div class="chef__grid">
+        <div class="counters rv-l" id="counters">
+          <div class="counter"><b data-count="15" data-suffix="">0</b><span>años de trayectoria</span></div>
+          <div class="counter"><b data-count="500" data-suffix="+">0</b><span>eventos servidos</span></div>
+          <div class="counter"><b data-count="62" data-suffix=" ★">0</b><span>reseñas Google</span></div>
+        </div>
+        <div class="chef__text rv-r">
+          <span class="eyebrow">El chef</span>
+          <p style="margin-top:1.4rem">Con más de 15 años de trayectoria en alta cocina, <span class="gold">Javier Checa</span> ha convertido el hogar de sus clientes en el mejor restaurante de la ciudad. Su cocina es intimista, precisa y profundamente personal. Cada menú, creado desde cero para ti.</p>
+          <div class="sign">— Javier Checa, Chefka Experience</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BONO REGALO -->
+  <section class="bono" id="bono" data-scroll-section>
+    <img class="bono__bg" src="https://chefkaexperience.com/wp-content/uploads/regala-chefka.jpg" alt="Bono regalo Chefka" loading="lazy" />
+    <div class="bono__ov"></div>
+    <div class="wrap">
+      <div class="bono__inner rv-l">
+        <span class="eyebrow">Bono regalo</span>
+        <h2>Regala una <em class="gold" style="font-style:italic">Experiencia Única</em></h2>
+        <p>Una cena para dos elaborada por el chef Javier Checa. Bono digital personalizado · Válido 6 meses.</p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap">
+          <a href="#formulario" class="btn-gold" data-cursor>Ver Bono Regalo <span class="arr">→</span></a>
+          <a href="https://wa.me/34660693887" target="_blank" rel="noopener" class="btn-ghost" data-cursor>Hablar con el chef</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEÑAS -->
+  <section class="resenas" data-scroll-section>
+    <div class="wrap">
+      <div class="sec__head rv" style="margin-bottom:3.5rem">
+        <span class="eyebrow">Sus invitados</span>
+        <h2>62 reseñas. <em>Valoración excelente.</em></h2>
+      </div>
+    </div>
+    <div class="tk-mask">
+      <div class="ticker" id="ticker"></div>
+    </div>
+  </section>
+
+  <!-- FORMULARIO -->
+  <section class="form-sec" id="formulario" data-scroll-section>
+    <div class="wrap">
+      <div class="form-grid">
+        <div class="form-aside rv-l">
+          <span class="eyebrow">Reserva</span>
+          <h2>Reserva tu <em class="gold" style="font-style:italic">experiencia</em></h2>
+          <p>Cuéntanos los detalles de tu evento. El chef Javier Checa te contactará para personalizar tu menú.</p>
+          <div class="meta">
+            <a href="tel:+34660693887" data-cursor><span class="k">Tel</span> 660 69 38 87</a>
+            <a href="mailto:info@chefkaexperience.com" data-cursor><span class="k">Email</span> info@chefkaexperience.com</a>
+            <a href="https://instagram.com/chefkaexperience" target="_blank" rel="noopener" data-cursor><span class="k">Social</span> @chefkaexperience</a>
+          </div>
+        </div>
+        <div class="rv-r">
+          <form id="reservaForm" novalidate>
+            <div class="row c3">
+              <div class="field"><label for="nombre">Nombre *</label><input id="nombre" name="nombre" type="text" required autocomplete="name" /></div>
+              <div class="field"><label for="email">Email *</label><input id="email" name="email" type="email" required autocomplete="email" /></div>
+              <div class="field"><label for="telefono">Teléfono *</label><input id="telefono" name="telefono" type="tel" required autocomplete="tel" /></div>
+            </div>
+            <div class="row c2">
+              <div class="field"><label for="localidad">Localidad del evento *</label><input id="localidad" name="localidad" type="text" required /></div>
+              <div class="field"><label for="fecha">Fecha del evento *</label><input id="fecha" name="fecha" type="date" required /></div>
+            </div>
+            <div class="row c2">
+              <div class="field"><label for="personas">Número de personas *</label><input id="personas" name="personas" type="number" min="1" required /></div>
+              <div class="field"><label for="servicio">Servicio *</label>
+                <select id="servicio" name="servicio" required>
+                  <option value="" disabled selected>Selecciona…</option>
+                  <option value="Almuerzo">Almuerzo</option>
+                  <option value="Cena">Cena</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="field"><label for="observaciones">Observaciones</label><textarea id="observaciones" name="observaciones" placeholder="Tipo de cocina preferida, alergias, ocasión especial…"></textarea></div>
+            </div>
+            <label class="check"><input type="checkbox" id="privacidad" required /> He leído y acepto la política de privacidad y el tratamiento de mis datos para gestionar la reserva.</label>
+            <button type="submit" class="submit" id="submitBtn" data-cursor>Reserva tu Experiencia</button>
+            <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" data-scroll-section>
+    <div class="wrap">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__logo"><img src="https://chefkaexperience.com/wp-content/uploads/2019/01/javierchecachef-logo.png" alt="Chefka Experience" /></div>
+          <p class="footer__tag">Alta cocina. En tu casa.</p>
+        </div>
+        <div class="footer__col">
+          <h4>Contacto</h4>
+          <a href="tel:+34660693887">660 69 38 87</a>
+          <a href="mailto:info@chefkaexperience.com">info@chefkaexperience.com</a>
+          <a href="#formulario">Reservar experiencia</a>
+        </div>
+        <div class="footer__col">
+          <h4>Síguenos</h4>
+          <a href="https://instagram.com/chefkaexperience" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://facebook.com/chefkaexperience" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://linkedin.com/company/chefkaexperience" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <div class="footer__btm">
+        <span>© Chefka Experience · Chef privado a domicilio · Madrid</span>
+        <span>Diseñado por <a href="https://whitemoon.es" target="_blank" rel="noopener">WhiteMoon</a></span>
+      </div>
+    </div>
+  </footer>
+
+</main>
+</div>
+
+<!-- CHATBOT -->
+<div class="fab" id="fab" aria-label="Abrir chat" role="button" tabindex="0">
+  <span class="ping"></span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8M12 15v7M5 3h14l-1 7a6 6 0 0 1-12 0L5 3z"/></svg>
+</div>
+<div class="chat" id="chat" aria-live="polite">
+  <div class="chat__head">
+    <div class="chat__av">E</div>
+    <div class="chat__id"><b>Elena</b><span>Chefka Experience</span></div>
+    <div class="chat__close" id="chatClose">×</div>
+  </div>
+  <div class="chat__body" id="chatBody"></div>
+  <div class="chat__quick" id="chatQuick">
+    <button data-q="Quiero reservar una experiencia">Reservar experiencia</button>
+    <button data-q="¿Qué menús y cocinas ofrecéis?">Ver menús</button>
+    <button data-q="Cuéntame sobre el bono regalo">Bono regalo</button>
+    <button data-q="¿Cómo funcionan los precios y la disponibilidad?">Precios y disponibilidad</button>
+  </div>
+  <div class="chat__foot">
+    <input id="chatInput" type="text" placeholder="Escribe tu mensaje…" autocomplete="off" />
+    <button id="chatSend" aria-label="Enviar">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+<script>
+(function(){
+  "use strict";
+  var REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var DESKTOP = window.matchMedia('(min-width: 901px)').matches && window.matchMedia('(hover:hover)').matches;
+
+  /* ---------- Config ---------- */
+  var SUPABASE_URL = 'https://mlaqtniujnvfxcvcourm.supabase.co';
+  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sYXF0bml1am52ZnhjdmNvdXJtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MzUyMzIsImV4cCI6MjA5MzQxMTIzMn0.Neh7VUS8ADsxf0DPab0JoJyGXOAXnLIaXzXbKzj2BGs';
+  var CHAT_FN = SUPABASE_URL + '/functions/v1/chefka-chat';
+  var NOTIFY_FN = SUPABASE_URL + '/functions/v1/chefka-notify';
+
+  /* ---------- Lead helpers (best-effort, never block UX) ---------- */
+  function saveLead(payload){
+    return fetch(SUPABASE_URL + '/rest/v1/leads_web', {
+      method:'POST',
+      headers:{
+        'apikey':SUPABASE_KEY,
+        'Authorization':'Bearer ' + SUPABASE_KEY,
+        'Content-Type':'application/json',
+        'Prefer':'return=minimal'
+      },
+      body:JSON.stringify(payload)
+    }).catch(function(e){ console.warn('saveLead', e); });
+  }
+  function notifyWhatsApp(data){
+    return fetch(NOTIFY_FN, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(data)
+    }).catch(function(e){ console.warn('notify', e); });
+  }
+
+  /* ---------- Locomotive smooth scroll (desktop only) ---------- */
+  var loco = null;
+  var scrollEl = document.getElementById('scroll');
+  if (DESKTOP && !REDUCE && window.LocomotiveScroll) {
+    try {
+      loco = new LocomotiveScroll({ el: scrollEl, smooth:true, lerp:0.08, multiplier:0.9 });
+    } catch(e){ loco = null; console.warn('loco', e); }
+  }
+
+  /* ---------- Nav scroll state ---------- */
+  var nav = document.getElementById('nav');
+  function onScroll(y){ nav.classList.toggle('scrolled', y > 60); }
+  if (loco){ loco.on('scroll', function(a){ onScroll(a.scroll.y); }); }
+  else { window.addEventListener('scroll', function(){ onScroll(window.scrollY); }, {passive:true}); onScroll(window.scrollY); }
+
+  /* ---------- Smooth anchor navigation (works with Locomotive) ---------- */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var id = a.getAttribute('href');
+      if (id.length < 2) return;
+      var target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      if (loco) loco.scrollTo(target);
+      else target.scrollIntoView({behavior:REDUCE?'auto':'smooth'});
+    });
+  });
+
+  /* ---------- IntersectionObserver reveals (bulletproof) ---------- */
+  var revEls = document.querySelectorAll('.rv,.rv-l,.rv-r');
+  if (REDUCE || !('IntersectionObserver' in window)) {
+    revEls.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, {threshold:0.15, rootMargin:'0px 0px -8% 0px'});
+    revEls.forEach(function(el){ io.observe(el); });
+    /* Failsafe: nothing stays hidden even if observer/scroll misbehaves */
+    setTimeout(function(){ revEls.forEach(function(el){ el.classList.add('in'); }); }, 4000);
+  }
+
+  /* ---------- Hero load animation (GSAP) ---------- */
+  if (!REDUCE && window.gsap) {
+    var tl = gsap.timeline({ defaults:{ ease:'power3.out' } });
+    tl.from('.hero__badge', {opacity:0,y:20,duration:.8,delay:.2})
+      .from('[data-line]', {opacity:0,yPercent:120,duration:1.1,stagger:.12}, '-=.4')
+      .from('.hero__sub', {opacity:0,y:16,duration:.8}, '-=.6')
+      .from('.hero__rotor', {opacity:0,y:16,duration:.8}, '-=.6')
+      .from('.hero__cta', {opacity:0,y:20,duration:.8}, '-=.5')
+      .from('.hero__stat', {opacity:0,y:30,duration:.7,stagger:.1}, '-=.4');
+  }
+
+  /* ---------- Rotating cuisine word (anime.js) ---------- */
+  var rotor = document.getElementById('rotor');
+  var cuisines = ['Mediterránea','Japonesa','Italiana','Mexicana','Francesa'];
+  var ri = 0;
+  if (rotor && !REDUCE){
+    setInterval(function(){
+      if (window.anime){
+        anime({ targets:rotor, opacity:[1,0], translateY:[0,-8], duration:300, easing:'easeInQuad',
+          complete:function(){
+            ri = (ri+1)%cuisines.length; rotor.textContent = cuisines[ri];
+            anime({ targets:rotor, opacity:[0,1], translateY:[8,0], duration:400, easing:'easeOutQuad' });
+          }
+        });
+      } else { ri=(ri+1)%cuisines.length; rotor.textContent=cuisines[ri]; }
+    }, 2400);
+  }
+
+  /* ---------- Animated counters (anime.js + IO) ---------- */
+  var counters = document.getElementById('counters');
+  function runCounters(){
+    document.querySelectorAll('[data-count]').forEach(function(el){
+      var end = parseInt(el.getAttribute('data-count'),10);
+      var suf = el.getAttribute('data-suffix') || '';
+      if (REDUCE || !window.anime){ el.textContent = end + suf; return; }
+      var obj = {v:0};
+      anime({ targets:obj, v:end, round:1, duration:1800, easing:'easeOutExpo',
+        update:function(){ el.textContent = obj.v + suf; } });
+    });
+  }
+  if (counters){
+    if (REDUCE || !('IntersectionObserver' in window)) runCounters();
+    else {
+      var cio = new IntersectionObserver(function(e){
+        if (e[0].isIntersecting){ runCounters(); cio.disconnect(); }
+      }, {threshold:0.4});
+      cio.observe(counters);
+    }
+  }
+
+  /* ---------- Reviews ticker (duplicated for seamless loop) ---------- */
+  var reviews = [
+    {n:'Silvia Andrada', t:'Es una gozada reunir a tus amigos o familia en casa para disfrutar de una comida rica. Si además viene un gran chef que cocina riquísimo, prepara tu mesa, sirve todo y deja tu cocina impecable… ¡gozada plus! Máxima calidad. Un 10!!!'},
+    {n:'Javier Rodríguez Pascua', t:'Recomendable experiencia. Javier vino a casa de unos amigos y nos hizo degustar unos platazos. Todo riquísimo, con explicaciones de cada plato y trato de 10.'},
+    {n:'Ana Díaz Sanz', t:'Una experiencia inolvidable, disfrutamos de un menú espectacular adaptado a los gustos de todos los comensales con diferentes platos, matices y texturas. Y un trato de 10.'},
+    {n:'Sergio Canales', t:'Gran calidad tanto en los platos como en la presentación. Muy cercano a la vez que muy profesional. Es como comer en un gran restaurante pero en tu propia casa.'},
+    {n:'Niki Mdm', t:'Increíble… volveremos a repetir. Un menú riquísimo, hecho con mimo y diferente. Él es un encanto y tiene unas manos de oro. Presentación perfecta. Un lujo.'},
+    {n:'Edite Silva', t:'Lo contactamos por la mañana para una cena esa misma noche y aceptó sin problema. El menú fue sorprendentemente bien elaborado. Javier fue muy educado, simpático y profesional. Lo repetiríamos.'},
+    {n:'Raúl Domínguez', t:'Una experiencia increíble. Es llevar un restaurante de lujo a la mesa de tu salón. El equipo amable, el servicio, la calidad y la profesionalidad… simplemente perfecto. Repetiremos seguro.'}
+  ];
+  var ticker = document.getElementById('ticker');
+  if (ticker){
+    var html = '';
+    var doubled = reviews.concat(reviews);
+    doubled.forEach(function(r){
+      html += '<article class="review"><div class="stars">★★★★★</div><p>“'+r.t+'”</p><div class="name">'+r.n+'</div></article>';
+    });
+    ticker.innerHTML = html;
+  }
+
+  /* ---------- Form submit ---------- */
+  var form = document.getElementById('reservaForm');
+  var msg = document.getElementById('formMsg');
+  var btn = document.getElementById('submitBtn');
+  if (form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      msg.className = 'form-msg';
+      var f = form;
+      if (!f.nombre.value.trim() || !f.email.value.trim() || !f.telefono.value.trim() ||
+          !f.localidad.value.trim() || !f.fecha.value || !f.personas.value || !f.servicio.value){
+        msg.textContent = 'Por favor, completa los campos obligatorios.'; msg.classList.add('err'); return;
+      }
+      if (!document.getElementById('privacidad').checked){
+        msg.textContent = 'Debes aceptar la política de privacidad.'; msg.classList.add('err'); return;
+      }
+      var obs = f.observaciones.value.trim();
+      var fecha = f.fecha.value, personas = f.personas.value, servicio = f.servicio.value, localidad = f.localidad.value.trim();
+      var mensaje = (obs ? obs + ' ' : '') + '| Fecha: ' + fecha + ' | Personas: ' + personas + ' | Servicio: ' + servicio + ' | Localidad: ' + localidad;
+
+      btn.disabled = true; btn.textContent = 'Enviando…';
+
+      var payload = {
+        nombre:f.nombre.value.trim(),
+        telefono:f.telefono.value.trim(),
+        email:f.email.value.trim(),
+        sector:'hosteleria-chef',
+        interes:'chefka-experience',
+        mensaje:mensaje,
+        origen:'chefka-experience-web',
+        fecha:new Date().toISOString()
+      };
+
+      Promise.all([
+        saveLead(payload),
+        notifyWhatsApp({ nombre:payload.nombre, telefono:payload.telefono, fecha:fecha, personas:personas, servicio:servicio, localidad:localidad })
+      ]).then(function(){
+        btn.textContent = '¡Reserva recibida!';
+        msg.textContent = 'Gracias. El chef Javier Checa te contactará en breve.'; msg.classList.add('ok');
+        form.reset();
+        setTimeout(function(){ btn.disabled=false; btn.textContent='Reserva tu Experiencia'; }, 4000);
+      }).catch(function(){
+        btn.disabled=false; btn.textContent='Reserva tu Experiencia';
+        msg.textContent='Ha ocurrido un error. Llámanos al 660 69 38 87.'; msg.classList.add('err');
+      });
+    });
+  }
+
+  /* ---------- Chatbot Elena ---------- */
+  var fab = document.getElementById('fab'),
+      chat = document.getElementById('chat'),
+      chatBody = document.getElementById('chatBody'),
+      chatInput = document.getElementById('chatInput'),
+      chatSend = document.getElementById('chatSend'),
+      chatClose = document.getElementById('chatClose'),
+      chatQuick = document.getElementById('chatQuick');
+  var history = [];
+  var greeted = false;
+  var leadDone = false;
+
+  function openChat(){
+    chat.classList.add('open');
+    if (!greeted){
+      greeted = true;
+      setTimeout(function(){
+        addMsg('bot', 'Bienvenido a Chefka Experience. Soy Elena. ¿En qué puedo ayudarle?');
+      }, 800);
+    }
+  }
+  function closeChat(){ chat.classList.remove('open'); }
+  fab.addEventListener('click', openChat);
+  fab.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' ') openChat(); });
+  chatClose.addEventListener('click', closeChat);
+
+  function addMsg(role, text){
+    var d = document.createElement('div');
+    d.className = 'msg ' + role;
+    d.textContent = text;
+    chatBody.appendChild(d);
+    chatBody.scrollTop = chatBody.scrollHeight;
+    return d;
+  }
+  function typing(){
+    var d = document.createElement('div');
+    d.className = 'msg bot typing';
+    d.innerHTML = '<i></i><i></i><i></i>';
+    chatBody.appendChild(d);
+    chatBody.scrollTop = chatBody.scrollHeight;
+    return d;
+  }
+
+  function handleLeadMarker(text){
+    var m = text.match(/\[LEAD\]([\s\S]*?)\[\/LEAD\]/);
+    var clean = text.replace(/\[LEAD\][\s\S]*?\[\/LEAD\]/,'').trim();
+    if (m && !leadDone){
+      leadDone = true;
+      var d = {};
+      try { d = JSON.parse(m[1]); } catch(e){ d = {}; }
+      if (d.telefono){
+        var mensaje = 'Reserva vía chat Elena | Fecha: ' + (d.fecha||'-') + ' | Personas: ' + (d.personas||'-') +
+                      ' | Cocina: ' + (d.cocina||'-') + ' | Localidad: ' + (d.localidad||'-');
+        saveLead({
+          nombre:d.nombre||'', telefono:d.telefono||'', email:'',
+          sector:'hosteleria-chef', interes:'chefka-experience',
+          mensaje:mensaje, origen:'chefka-experience-chat', fecha:new Date().toISOString()
+        });
+        notifyWhatsApp({ nombre:d.nombre, telefono:d.telefono, fecha:d.fecha, personas:d.personas, servicio:d.cocina, cocina:d.cocina, localidad:d.localidad });
+      }
+    }
+    return clean || text;
+  }
+
+  function send(text){
+    if (!text) return;
+    addMsg('user', text);
+    history.push({role:'user', content:text});
+    chatInput.value='';
+    var t = typing();
+    fetch(CHAT_FN, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({ messages:history })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      t.remove();
+      var reply = (data && data.reply) ? data.reply : 'Disculpe, puede contactar con el chef en el 660 69 38 87.';
+      var shown = handleLeadMarker(reply);
+      history.push({role:'assistant', content:reply});
+      addMsg('bot', shown);
+    })
+    .catch(function(){
+      t.remove();
+      addMsg('bot', 'Disculpe, ha habido un inconveniente. Puede llamar al 660 69 38 87.');
+    });
+  }
+
+  chatSend.addEventListener('click', function(){ send(chatInput.value.trim()); });
+  chatInput.addEventListener('keydown', function(e){ if(e.key==='Enter'){ send(chatInput.value.trim()); } });
+  chatQuick.addEventListener('click', function(e){
+    var b = e.target.closest('button'); if(!b) return;
+    send(b.getAttribute('data-q'));
+  });
+
+  /* ---------- Custom cursor (desktop) ---------- */
+  if (DESKTOP && !REDUCE){
+    var cursor = document.getElementById('cursor');
+    var cx=0,cy=0,tx=0,ty=0;
+    window.addEventListener('mousemove', function(e){ tx=e.clientX; ty=e.clientY; });
+    (function loop(){ cx+=(tx-cx)*0.18; cy+=(ty-cy)*0.18; cursor.style.transform='translate('+cx+'px,'+cy+'px) translate(-50%,-50%)'; requestAnimationFrame(loop); })();
+    document.querySelectorAll('a,button,[data-cursor],.coc,.fab').forEach(function(el){
+      el.addEventListener('mouseenter', function(){ cursor.classList.add('is-active'); });
+      el.addEventListener('mouseleave', function(){ cursor.classList.remove('is-active'); });
+    });
+  }
+
+  /* ---------- Refresh Locomotive once everything (images/fonts) settled ---------- */
+  if (loco){
+    window.addEventListener('load', function(){ setTimeout(function(){ loco.update(); }, 400); });
+  }
+
+  /* ---------- Mobile burger -> jump to reservar ---------- */
+  var burger = document.getElementById('burger');
+  if (burger){ burger.addEventListener('click', function(){ var f=document.getElementById('formulario'); if(loco) loco.scrollTo(f); else f.scrollIntoView({behavior:'smooth'}); }); }
+
+})();
+</script>
+</body>
+</html>
