@@ -129,6 +129,19 @@
     }
   }
   function closeChat(){ chat.classList.remove('open'); }
+  /* Abre el chat y lanza la reserva simulando click en "Reservar experiencia". */
+  function openChatAndReserve(){
+    greeted = true;
+    openChat();
+    setTimeout(function(){
+      if (!chatQuick) return;
+      var btns = chatQuick.querySelectorAll('button'), rb = btns[0];
+      btns.forEach(function(b){ if (b.textContent.trim() === 'Reservar experiencia') rb = b; });
+      if (rb) rb.click();
+    }, 300);
+  }
+  window.openChat = openChat;
+  window.openChatAndReserve = openChatAndReserve;
 
   function addMsg(role, text){
     var d = document.createElement('div');
@@ -184,13 +197,8 @@
   if (chatInput) chatInput.addEventListener('keydown', function(e){ if(e.key==='Enter'){ send(chatInput.value.trim()); } });
   if (chatQuick) chatQuick.addEventListener('click', function(e){ var b=e.target.closest('button'); if(!b) return; send(b.getAttribute('data-q')); });
 
-  /* ---------- Botones que abren el chat ("Reservar este menú") ---------- */
+  /* ---------- "Reservar este menú" -> abre el chat e inicia el flujo de reserva ---------- */
   document.querySelectorAll('[data-openchat]').forEach(function(el){
-    el.addEventListener('click', function(e){
-      e.preventDefault();
-      openChat();
-      var menu = el.getAttribute('data-menu');
-      if (menu && !el._sent){ el._sent = true; setTimeout(function(){ send('Hola, me interesa reservar el menú ' + menu + '.'); }, 1100); }
-    });
+    el.addEventListener('click', function(e){ e.preventDefault(); openChatAndReserve(); });
   });
 })();
