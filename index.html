@@ -703,7 +703,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
     <a href="#chef" data-cursor>El Chef</a>
     <a href="#galeria" data-cursor>Galería</a>
     <a href="#como-trabajo" data-cursor>Cómo trabajo</a>
-    <a href="#cta" class="nav__cta" data-cursor>Reservar</a>
+    <a href="#cta" class="nav__cta" data-reserve data-cursor>Reservar</a>
   </div>
   <div class="nav__burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navMobile"><span></span><span></span><span></span></div>
 </nav>
@@ -720,7 +720,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
   <a href="#chef">El Chef</a>
   <a href="#galeria">Galería</a>
   <a href="#como-trabajo">Cómo trabajo</a>
-  <a href="#cta" class="nav__cta">Reservar</a>
+  <a href="#cta" class="nav__cta" data-reserve>Reservar</a>
 </div>
 
 <div data-scroll-container id="scroll">
@@ -743,7 +743,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
       </h1>
       <p class="hero__sub">Chef Privado · Javier Checa · Madrid</p>
       <p class="hero__rotor">Cocina <span class="rot" id="rotor">Mediterránea</span></p>
-      <a href="#cta" class="hero__cta" data-cursor>Reserva tu Experiencia <span class="arr">→</span></a>
+      <a href="#cta" class="hero__cta" data-reserve data-cursor>Reserva tu Experiencia <span class="arr">→</span></a>
     </div>
 
     <div class="hero__stats" id="heroStats">
@@ -1136,6 +1136,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
   }
   document.querySelectorAll('a[href^="#"]').forEach(function(a){
     a.addEventListener('click', function(e){
+      if (a.hasAttribute('data-reserve')) return;   // lo gestiona openChatAndReserve (abre el chat, sin scroll)
       var id = a.getAttribute('href');
       if (id.length < 2) return;
       var target = document.querySelector(id);
@@ -1315,6 +1316,19 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
       }, 2000);
     }
   }
+  /* Abre el chat y lanza directamente el flujo de reserva (simula click en el
+     quick button "Reservar experiencia"). Marca greeted para no intercalar el
+     saludo genérico en mitad del flujo. */
+  function openChatAndReserve(){
+    greeted = true;
+    openChat();
+    setTimeout(function(){
+      var rb = chatQuick ? chatQuick.querySelector('[data-flow="reserva"]') : null;
+      if (rb) rb.click();
+    }, 300);
+  }
+  window.openChat = openChat;
+  window.openChatAndReserve = openChatAndReserve;
   function closeChat(){ chat.classList.remove('open'); }
   fab.addEventListener('click', openChat);
   fab.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' ') openChat(); });
@@ -1576,9 +1590,14 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
     send(b.getAttribute('data-q'));
   });
 
-  /* ---------- "Habla con Elena" buttons open the chat ---------- */
+  /* ---------- "Habla con Elena" buttons open the chat (sin flujo) ---------- */
   document.querySelectorAll('[data-openchat]').forEach(function(el){
     el.addEventListener('click', function(e){ e.preventDefault(); openChat(); });
+  });
+
+  /* ---------- Botones "Reservar" (nav + hero) -> abren el chat e inician la reserva ---------- */
+  document.querySelectorAll('[data-reserve]').forEach(function(el){
+    el.addEventListener('click', function(e){ e.preventDefault(); openChatAndReserve(); });
   });
 
   /* ---------- Custom cursor (desktop) ---------- */
