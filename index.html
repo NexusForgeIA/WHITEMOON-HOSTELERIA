@@ -880,6 +880,19 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
   else { window.addEventListener('scroll', function(){ onScroll(window.scrollY); }, {passive:true}); onScroll(window.scrollY); }
 
   /* ---------- Smooth anchor navigation (works with Locomotive) ---------- */
+  /* Bulletproof: with Locomotive active the body is overflow:hidden, so if
+     loco.scrollTo ever throws the page would stay frozen with no way to scroll.
+     We always keep a native fallback (and re-enable native scroll on failure). */
+  function gotoTarget(target){
+    if (loco){
+      try { loco.scrollTo(target); return; }
+      catch (err){
+        console.warn('loco.scrollTo failed, native fallback', err);
+        document.documentElement.classList.remove('has-scroll-smooth');
+      }
+    }
+    target.scrollIntoView({behavior:REDUCE?'auto':'smooth'});
+  }
   document.querySelectorAll('a[href^="#"]').forEach(function(a){
     a.addEventListener('click', function(e){
       var id = a.getAttribute('href');
@@ -887,8 +900,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
       var target = document.querySelector(id);
       if (!target) return;
       e.preventDefault();
-      if (loco) loco.scrollTo(target);
-      else target.scrollIntoView({behavior:REDUCE?'auto':'smooth'});
+      gotoTarget(target);
     });
   });
 
@@ -1125,14 +1137,33 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
     });
   }
 
-  /* ---------- Refresh Locomotive once everything (images/fonts) settled ---------- */
+  /* ---------- Keep Locomotive geometry fresh (root cause of "Menús" freeze) ----------
+     Las secciones objetivo usan imágenes loading="lazy" sin tamaño intrínseco.
+     Al saltar a una sección con muchas imágenes (p.ej. #menus, 5 imágenes lazy)
+     éstas cargan a mitad del scroll, cambia la altura del documento y los offsets
+     y el limit que Locomotive cacheó se quedan obsoletos -> el smooth scroll se
+     bloquea y la web se queda congelada. Recalculamos (con debounce) cada vez que
+     una imagen o el vídeo del hero termina de cargar, para que la geometría sea
+     siempre válida. */
   if (loco){
-    window.addEventListener('load', function(){ setTimeout(function(){ loco.update(); }, 400); });
+    var locoUpdTimer;
+    var refreshLoco = function(){
+      clearTimeout(locoUpdTimer);
+      locoUpdTimer = setTimeout(function(){ try { loco.update(); } catch(e){ console.warn('loco.update', e); } }, 150);
+    };
+    window.addEventListener('load', function(){ setTimeout(refreshLoco, 400); });
+    document.querySelectorAll('img').forEach(function(img){
+      if (img.complete) return;
+      img.addEventListener('load', refreshLoco, {passive:true});
+      img.addEventListener('error', refreshLoco, {passive:true});
+    });
+    var heroVid = document.getElementById('heroVideo');
+    if (heroVid) heroVid.addEventListener('loadeddata', refreshLoco, {passive:true});
   }
 
   /* ---------- Mobile burger -> jump to reservar ---------- */
   var burger = document.getElementById('burger');
-  if (burger){ burger.addEventListener('click', function(){ var f=document.getElementById('cta'); if(loco) loco.scrollTo(f); else f.scrollIntoView({behavior:'smooth'}); }); }
+  if (burger){ burger.addEventListener('click', function(){ var f=document.getElementById('cta'); if(f) gotoTarget(f); }); }
 
 })();
 </script>
