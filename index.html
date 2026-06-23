@@ -1119,7 +1119,14 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
      We always keep a native fallback (and re-enable native scroll on failure). */
   function gotoTarget(target){
     if (loco){
-      try { loco.scrollTo(target); return; }
+      try {
+        /* #top es el <main>, no un data-scroll-section: Locomotive no lo transforma,
+           así que scrollTo(elem) calcula la posición actual y no hace nada (Inicio
+           "no respondía"). Para volver al inicio hay que ir a la posición 0. */
+        if (target.id === 'top') loco.scrollTo(0);
+        else loco.scrollTo(target);
+        return;
+      }
       catch (err){
         console.warn('loco.scrollTo failed, native fallback', err);
         document.documentElement.classList.remove('has-scroll-smooth');
