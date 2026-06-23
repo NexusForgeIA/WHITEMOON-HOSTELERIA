@@ -1271,14 +1271,14 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
 
   /* ---------- Navbar dropdown "Mis propuestas" + menú móvil ---------- */
   /* Una sola fuente de datos: se renderiza en el dropdown de escritorio y en el
-     acordeón del menú hamburguesa. Al elegir una propuesta se hace scroll suave
-     a su cocina (#coc-*) y se resalta la tarjeta. */
+     acordeón del menú hamburguesa. Cada propuesta enlaza a su página individual
+     en /menu/<slug>/ con el contenido completo del menú. */
   var PROPUESTAS = [
-    { id:'coc-med', name:'Cocina Mediterránea',        desc:'Jamón ibérico, gambas y producto de la ría gallega. Carnes, pescados y postres de autor.' },
-    { id:'coc-jap', name:'Cocina Japonesa Fusión',     desc:'Sushi artesano, gyozas y ramen con alma madrileña y tailandesa. Tatakis y mochis cítricos.' },
-    { id:'coc-ita', name:'Cocina Italiana Siciliana',  desc:'La Sicilia auténtica: entrantes refinados, pastas, risottos y postres tradicionales.' },
-    { id:'coc-mex', name:'Cocina Mexicana Acapulqueña',desc:'Cochinita pibil, enchiladas de pato y tamales ibéricos. Fusión con guiños a Japón y Francia.' },
-    { id:'coc-fra', name:'Cocina Francesa',            desc:'Mousse de foie, vieiras braseadas, magret de pato y solomillo Rossini. Clásicos de autor.' }
+    { slug:'mediterraneo',         name:'Cocina Mediterránea',        desc:'Jamón ibérico, gambas y producto de la ría gallega. Carnes, pescados y postres de autor.' },
+    { slug:'japones-fusion',       name:'Cocina Japonesa Fusión',     desc:'Sushi artesano, gyozas y ramen con alma madrileña y tailandesa. Tatakis y mochis cítricos.' },
+    { slug:'italiano-siciliano',   name:'Cocina Italiana Siciliana',  desc:'La Sicilia auténtica: entrantes refinados, pastas, risottos y postres tradicionales.' },
+    { slug:'mexicano-acapulqueno', name:'Cocina Mexicana Acapulqueña',desc:'Cochinita pibil, enchiladas de pato y tamales ibéricos. Fusión con guiños a Japón y Francia.' },
+    { slug:'francesa',             name:'Cocina Francesa',            desc:'Mousse de foie, vieiras braseadas, magret de pato y solomillo Rossini. Clásicos de autor.' }
   ];
 
   var burger    = document.getElementById('burger');
@@ -1295,32 +1295,18 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
     if (navDrop){ navDrop.classList.remove('open'); var t=navDrop.querySelector('.nav__drop-toggle'); if(t) t.setAttribute('aria-expanded','false'); }
   }
 
-  /* Selección de una propuesta -> scroll suave + resaltado de la tarjeta */
-  function selectProposal(id){
-    var card = document.getElementById(id) || document.getElementById('menus');
-    closeMobileMenu(); closeDesktopDrop();
-    if (!card) return;
-    gotoTarget(card);
-    if (card.classList.contains('coc')){
-      card.classList.remove('coc--flash');
-      void card.offsetWidth;            /* reinicia la animación si se reelige */
-      card.classList.add('coc--flash');
-      setTimeout(function(){ card.classList.remove('coc--flash'); }, 2000);
-    }
-  }
-
-  /* Render de los items en un contenedor dado */
+  /* Render de los items: cada uno enlaza a su página individual del menú */
   function renderItems(container, itemClass){
     if (!container) return;
     PROPUESTAS.forEach(function(m){
       var a = document.createElement('a');
-      a.href = '#' + m.id;
+      a.href = 'menu/' + m.slug + '/';
       a.className = itemClass;
       a.setAttribute('role','menuitem');
       a.setAttribute('data-cursor','');
       a.innerHTML = '<span class="nav__drop-name">' + m.name + '</span>' +
                     '<span class="nav__drop-desc">' + m.desc + '</span>';
-      a.addEventListener('click', function(e){ e.preventDefault(); selectProposal(m.id); });
+      a.addEventListener('click', function(){ closeMobileMenu(); closeDesktopDrop(); });
       container.appendChild(a);
     });
   }
