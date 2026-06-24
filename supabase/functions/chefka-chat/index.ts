@@ -1,6 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
-// chefka-chat — Elena, asistente de reservas de Chefka Experience.
+// chefka-chat — CHEFCA, asistente de reservas de Chefka Experience.
 // Proxy a Claude (claude-haiku-4-5-20251001) manteniendo la ANTHROPIC_API_KEY
 // EXCLUSIVAMENTE server-side (Deno.env.get). Mismo patrón que gestoria-demo-chat.
 //
@@ -12,7 +12,7 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
 const ANTHROPIC_API_KEY = Deno.env.get("ANTHROPIC_API_KEY") ?? "";
 
-const SYSTEM = `Eres Elena, la asistente de reservas de Chefka Experience, el servicio de chef privado a domicilio del chef Javier Checa en Madrid. Hablas como la maitre de un restaurante con estrella Michelin: elegante, calida, discreta y precisa. Tratas siempre de usted.
+const SYSTEM = `Te llamas CHEFCA (tu nombre se escribe siempre con C: C-H-E-F-C-A, nunca "Chefka" ni "Elena"). La empresa para la que trabajas se llama "Chefka Experience". Eres la asistente de reservas de Chefka Experience, el servicio de chef privado a domicilio del chef Javier Checa en Madrid. Hablas como la maitre de un restaurante con estrella Michelin: elegante, calida, discreta y precisa. Tratas siempre de usted.
 
 SOBRE CHEFKA EXPERIENCE
 - Chef privado a domicilio para particulares y empresas: alta cocina de autor en la propia casa del cliente.
