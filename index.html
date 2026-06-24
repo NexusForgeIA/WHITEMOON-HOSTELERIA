@@ -1008,9 +1008,9 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
       <div class="cta__inner rv">
         <span class="eyebrow">Reserva</span>
         <h2>¿Listo para tu <em>experiencia</em>?</h2>
-        <p>Habla con <b>Elena</b>, nuestra asistente. Te ayuda a elegir el menú, toma los datos de tu evento y el chef Javier Checa te contacta para confirmarlo todo.</p>
+        <p>Habla con <b>CHEFCA</b>, nuestra asistente. Te ayuda a elegir el menú, toma los datos de tu evento y el chef Javier Checa te contacta para confirmarlo todo.</p>
         <div class="cta__actions">
-          <button type="button" class="btn-gold" data-openchat data-cursor>Habla con Elena <span class="arr">→</span></button>
+          <button type="button" class="btn-gold" data-openchat data-cursor>Habla con CHEFCA <span class="arr">→</span></button>
           <a href="tel:+34660693887" class="btn-ghost" data-cursor>660 69 38 87</a>
           <a href="mailto:info@chefkaexperience.com" class="btn-ghost" data-cursor>info@chefkaexperience.com</a>
         </div>
@@ -1052,14 +1052,14 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
 </div>
 
 <!-- CHATBOT -->
-<div class="fab" id="fab" aria-label="Abrir chat con Elena" role="button" tabindex="0">
+<div class="fab" id="fab" aria-label="Abrir chat con CHEFCA" role="button" tabindex="0">
   <span class="ping"></span>
   <img src="logo-chefka.jpeg" alt="Chefka Experience" width="32" height="32" />
 </div>
 <div class="chat" id="chat" aria-live="polite">
   <div class="chat__head">
     <div class="chat__av">E</div>
-    <div class="chat__id"><b>Elena</b><span>Chefka Experience</span></div>
+    <div class="chat__id"><b>CHEFCA</b><span>Chefka Experience</span></div>
     <div class="chat__close" id="chatClose">×</div>
   </div>
   <div class="chat__body" id="chatBody"></div>
@@ -1313,7 +1313,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
     galleryEl.innerHTML = gh;
   }
 
-  /* ---------- Chatbot Elena ---------- */
+  /* ---------- Chatbot CHEFCA ---------- */
   var fab = document.getElementById('fab'),
       chat = document.getElementById('chat'),
       chatBody = document.getElementById('chatBody'),
@@ -1330,7 +1330,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
     if (!greeted){
       greeted = true;
       setTimeout(function(){
-        addMsg('bot', 'Bienvenido a Chefka Experience. Soy Elena. ¿En qué puedo ayudarle?');
+        addMsg('bot', 'Bienvenido a Chefka Experience. Soy CHEFCA. ¿En qué puedo ayudarle?');
       }, 2000);
     }
   }
@@ -1538,7 +1538,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
     saveLead({
       nombre:reserva.nombre, telefono:reserva.telefono, email:'',
       sector:'hosteleria-chef', interes:'chefka-experience',
-      mensaje:'Reserva guiada Elena | ' + resumen,
+      mensaje:'Reserva guiada CHEFCA | ' + resumen,
       origen:'chefka-experience-chat', fecha:new Date().toISOString()
     });
     /* chefka-notify imprime "Servicio"; incluimos la cocina ahí para que también
@@ -1563,7 +1563,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
       var d = {};
       try { d = JSON.parse(m[1]); } catch(e){ d = {}; }
       if (d.telefono){
-        var mensaje = 'Reserva vía chat Elena | Fecha: ' + (d.fecha||'-') + ' | Personas: ' + (d.personas||'-') +
+        var mensaje = 'Reserva vía chat CHEFCA | Fecha: ' + (d.fecha||'-') + ' | Personas: ' + (d.personas||'-') +
                       ' | Cocina: ' + (d.cocina||'-') + ' | Localidad: ' + (d.localidad||'-');
         saveLead({
           nombre:d.nombre||'', telefono:d.telefono||'', email:'',
@@ -1608,7 +1608,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
     send(b.getAttribute('data-q'));
   });
 
-  /* ---------- "Habla con Elena" buttons open the chat (sin flujo) ---------- */
+  /* ---------- "Habla con CHEFCA" buttons open the chat (sin flujo) ---------- */
   document.querySelectorAll('[data-openchat]').forEach(function(el){
     el.addEventListener('click', function(e){ e.preventDefault(); openChat(); });
   });
