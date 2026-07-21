@@ -1,18 +1,20 @@
-# WHITEMOON-HOSTELERIA — WhiteMoon · Chef Privado (demo)
+# WHITEMOON-HOSTELERIA — Chef CMC (demo)
 
 Demo de producto de **WhiteMoon Agencia IA**: web de **chef privado a domicilio** con
 chatbot de reservas. Diseño dark premium (negro + amarillo fluor). HTML/CSS/JS puro.
 
-> **Es una demo.** El chef, los textos, las reseñas y las estadísticas son **ficticios**
-> y solo sirven de ejemplo. No se atribuye a nadie formación, premios ni credenciales.
-> Las páginas llevan `noindex, nofollow`.
+> **Es una demo.** «Chef CMC» es un **chef de ejemplo**; los textos, las reseñas y las
+> estadísticas son **ficticios** y solo sirven de muestra. No se atribuye a nadie
+> formación, premios ni credenciales. Las páginas llevan `noindex, nofollow`.
 
 ## Stack
 - Frontend: `index.html` (sin frameworks). GSAP + ScrollTrigger, Anime.js, Locomotive Scroll.
 - Tipografía: **Syne** (display) + **Inter Tight** (texto).
 - Paleta: `--bg:#08080A` · `--acid:#D9FF00` (amarillo fluor) · `--acid2:#EBFF5C`.
-- Imágenes: locales en `assets/img/` (WebP + JPG de respaldo, con `width`/`height` y `loading="lazy"`).
-  Fotografías de [Unsplash](https://unsplash.com); logo y retrato del chef, propios.
+  El acento solo se usa sobre negro; sobre fluor el texto va en `#08080A`.
+- Imágenes: locales en `assets/img/` (WebP + JPG de respaldo, con `width`/`height`).
+  Fotografías de ambiente de [Unsplash](https://unsplash.com); logo y retrato del chef, propios.
+  El retrato (`chef-cmc.*`, 910×1400) se sirve `eager`; el resto `lazy`.
 - Backend: Supabase `mlaqtniujnvfxcvcourm`
   - Captura de leads → tabla `leads_web` (`origen='whitemoon-chef-demo-chat'`).
   - **Edge Functions** (claves SOLO server-side):

@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Chef Privado a Domicilio · WhiteMoon (demo)</title>
+<title>Chef Privado a Domicilio · Chef CMC (demo WhiteMoon)</title>
 <meta name="description" content="Demo de WhiteMoon Agencia IA: web de chef privado a domicilio con chatbot de reservas. Contenido y datos ficticios, solo para demostración." />
 <meta name="robots" content="noindex, nofollow" />
 
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Chef Privado a Domicilio · WhiteMoon (demo)" />
+<meta property="og:title" content="Chef Privado a Domicilio · Chef CMC (demo WhiteMoon)" />
 <meta property="og:description" content="Demo de WhiteMoon Agencia IA: chef privado a domicilio con chatbot de reservas. Datos ficticios." />
 <meta property="og:image" content="assets/img/hero.jpg" />
 <meta property="og:locale" content="es_ES" />
@@ -32,7 +32,7 @@
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Chef Privado a Domicilio · WhiteMoon (demo)",
+  "name": "Chef Privado a Domicilio · Chef CMC (demo WhiteMoon)",
   "description": "Demo de producto de WhiteMoon Agencia IA. Contenido ilustrativo, no es un negocio real.",
   "inLanguage": "es-ES",
   "creator": {
@@ -599,7 +599,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
 /* ---------- El Chef — fotos editorial ---------- */
 .chef__grid{grid-template-columns:45fr 55fr;gap:60px;align-items:start}
 .chef__photos{position:relative;padding:0 0 3.5rem}
-.chef-ph-main{width:88%;min-height:600px;object-fit:cover;border-radius:10px;border:1px solid var(--border);display:block}
+.chef-ph-main{width:88%;aspect-ratio:13/20;object-fit:cover;border-radius:10px;border:1px solid var(--border);display:block}
 .chef-ph-sm{position:absolute;right:0;bottom:0;width:54%;min-height:300px;object-fit:cover;border-radius:8px;border:4px solid var(--bg);box-shadow:0 24px 60px -20px rgba(0,0,0,.85)}
 .chef-ph-badge{position:absolute;left:0;top:1.4rem;background:var(--acid);color:#08080A;font-weight:600;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;padding:.45rem 1rem;border-radius:3px}
 .chef__name{font-family:var(--display);font-weight:800;font-size:clamp(2rem,3.6vw,3.1rem);letter-spacing:-.04em;margin:.8rem 0 1.2rem;line-height:1}
@@ -703,7 +703,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
   .chef__photos{padding:0 0 3rem;max-width:460px}   /* sin tope la foto llegaba a 777x971 en tablet */
   /* min-height con el ancho al 100% daba una caja muy ancha y baja, y object-fit:cover
      recortaba la foto hasta dejar solo la cara. Con aspect-ratio se mantiene vertical. */
-  .chef-ph-main{width:100%;min-height:0;aspect-ratio:4/5}
+  .chef-ph-main{width:100%;aspect-ratio:13/20}
   .chef-ph-sm{width:50%;min-height:0;aspect-ratio:4/3}
 }
 @media(max-width:600px){
@@ -732,7 +732,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
       <source srcset="assets/img/whitemoon-mark.webp" type="image/webp" />
       <img src="assets/img/whitemoon-mark.jpg" alt="WhiteMoon Agencia IA" width="38" height="38" />
     </picture>
-    <b>WhiteMoon <i>· Chef Privado</i></b>
+    <b>Chef <i>CMC</i></b>
   </a>
   <div class="nav__links">
     <a href="#top" data-cursor>Inicio</a>
@@ -784,7 +784,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
     <div class="hero__ghost" aria-hidden="true">WHITEMOON</div>
 
     <div class="hero__inner">
-      <span class="hero__badge"><span class="dot"></span>Demo · WhiteMoon Agencia IA</span>
+      <span class="hero__badge"><span class="dot"></span>Chef CMC · Demo de WhiteMoon</span>
       <h1 id="heroTitle">
         <span class="block" data-line>Alta Cocina</span>
         <span class="l2" data-line>en Tu Propia Casa</span>
@@ -928,9 +928,11 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
     <div class="wrap">
       <div class="chef__grid">
         <div class="chef__photos rv-l">
+          <!-- 910x1400 = 13/20, la misma relacion que el original: la caja usa
+               ese aspect-ratio, asi que object-fit:cover no recorta nada. -->
           <picture>
-            <source srcset="assets/img/chef-retrato.webp" type="image/webp" />
-            <img class="chef-ph-main" src="assets/img/chef-retrato.jpg" alt="Cristóbal Martínez, chef de ejemplo de la demo" width="900" height="1200" loading="lazy" />
+            <source srcset="assets/img/chef-cmc.webp" type="image/webp" />
+            <img class="chef-ph-main" src="assets/img/chef-cmc.jpg" alt="Chef CMC, chef de ejemplo de la demo, en cocina profesional" width="910" height="1400" loading="eager" decoding="async" />
           </picture>
           <picture>
             <source srcset="assets/img/chef-cocina.webp" type="image/webp" />
@@ -940,15 +942,15 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
         </div>
         <div class="chef__text rv-r">
           <span class="eyebrow">El chef</span>
-          <h2 class="chef__name">Cristóbal <em>Martínez</em></h2>
+          <h2 class="chef__name">Chef <em>CMC</em></h2>
           <p>Chef privado a domicilio: alta cocina de autor en la intimidad de tu propia casa. Cada servicio se plantea desde cero —producto de temporada, menú a medida y una puesta en escena cuidada— para particulares y empresas en Madrid y alrededores.</p>
-          <p style="margin-top:1rem;font-size:.92rem;color:var(--muted)"><b class="acid">Nota:</b> esta es una web de demostración de WhiteMoon Agencia IA. El chef, los textos y las reseñas son ficticios y sirven únicamente de ejemplo.</p>
+          <p style="margin-top:1rem;font-size:.92rem;color:var(--muted)"><b class="acid">Nota:</b> esta es una web de demostración de WhiteMoon Agencia IA. Chef CMC es un chef de ejemplo: los textos, las reseñas y las cifras son ficticios y sirven únicamente de muestra.</p>
           <div class="counters" id="counters">
             <div class="counter"><b data-count="5" data-suffix="">0</b><span>cocinas de autor</span></div>
             <div class="counter"><b data-count="3" data-suffix="">0</b><span>pasos hasta tu mesa</span></div>
             <div class="counter"><b data-count="100" data-suffix="%">0</b><span>menú a medida</span></div>
           </div>
-          <div class="sign">— WhiteMoon · Chef Privado (demo)</div>
+          <div class="sign">— Chef CMC · demo de WhiteMoon</div>
         </div>
       </div>
 
@@ -1108,7 +1110,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
         </div>
       </div>
       <div class="footer__btm">
-        <span>© WhiteMoon · Chef Privado · Demo de producto · Madrid</span>
+        <span>© Chef CMC · Demo de producto de WhiteMoon · Madrid</span>
         <span>Diseñado por <a href="https://whitemoon.es" target="_blank" rel="noopener">WhiteMoon</a></span>
       </div>
     </div>
@@ -1131,7 +1133,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
       <source srcset="assets/img/whitemoon-mark.webp" type="image/webp" />
       <img class="chat__av" src="assets/img/whitemoon-mark.jpg" alt="WhiteMoon" width="40" height="40" />
     </picture>
-    <div class="chat__id"><b>LUNA</b><span>WhiteMoon · Chef Privado</span></div>
+    <div class="chat__id"><b>LUNA</b><span>Chef CMC</span></div>
     <div class="chat__close" id="chatClose">×</div>
   </div>
   <div class="chat__body" id="chatBody"></div>
@@ -1402,7 +1404,7 @@ form .row.c2{grid-template-columns:repeat(2,1fr)}
     if (!greeted){
       greeted = true;
       setTimeout(function(){
-        addMsg('bot', 'Bienvenido a WhiteMoon · Chef Privado. Soy LUNA, la asistente de reservas. ¿En qué puedo ayudarle?');
+        addMsg('bot', 'Bienvenido a Chef CMC. Soy LUNA, la asistente de reservas. ¿En qué puedo ayudarle?');
       }, 2000);
     }
   }

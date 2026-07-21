@@ -126,7 +126,7 @@
     chat.classList.add('open');
     if (!greeted){
       greeted = true;
-      setTimeout(function(){ addMsg('bot', 'Bienvenido a WhiteMoon · Chef Privado. Soy LUNA, la asistente de reservas. ¿En qué puedo ayudarle?'); }, 800);
+      setTimeout(function(){ addMsg('bot', 'Bienvenido a Chef CMC. Soy LUNA, la asistente de reservas. ¿En qué puedo ayudarle?'); }, 800);
     }
   }
   function closeChat(){ chat.classList.remove('open'); }
