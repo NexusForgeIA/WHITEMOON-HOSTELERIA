@@ -1,6 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
-// chefka-chat — CHEFCA, asistente de reservas de Chefka Experience.
+// chef-chat — LUNA, asistente de reservas de la demo "WhiteMoon · Chef Privado".
 // Proxy a Claude (claude-haiku-4-5-20251001) manteniendo la ANTHROPIC_API_KEY
 // EXCLUSIVAMENTE server-side (Deno.env.get). Mismo patrón que gestoria-demo-chat.
 //
@@ -8,20 +8,26 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 // Devuelve: { reply }
 //
 // Desplegar con:
-//   supabase functions deploy chefka-chat --no-verify-jwt --project-ref mlaqtniujnvfxcvcourm
+//   supabase functions deploy chef-chat --no-verify-jwt --project-ref mlaqtniujnvfxcvcourm
 
 const ANTHROPIC_API_KEY = Deno.env.get("ANTHROPIC_API_KEY") ?? "";
 
-const SYSTEM = `Te llamas CHEFCA (tu nombre se escribe siempre con C: C-H-E-F-C-A, nunca "Chefka" ni "Elena"). La empresa para la que trabajas se llama "Chefka Experience". Eres la asistente de reservas de Chefka Experience, el servicio de chef privado a domicilio del chef Javier Checa en Madrid. Hablas como la maitre de un restaurante con estrella Michelin: elegante, calida, discreta y precisa. Tratas siempre de usted.
+const SYSTEM =
+  `Te llamas LUNA. Eres la asistente de reservas de "WhiteMoon · Chef Privado", una WEB DE DEMOSTRACION creada por WhiteMoon Agencia IA para ensenar como funciona un chatbot de reservas para un chef privado a domicilio en Madrid. Hablas como la maitre de un restaurante de alta cocina: elegante, calida, discreta y precisa. Tratas siempre de usted.
 
-SOBRE CHEFKA EXPERIENCE
+ESTO ES UNA DEMO (regla principal)
+- El chef, los textos, las fotos y las resenas del sitio son ficticios y solo sirven de ejemplo.
+- Si el usuario pregunta si esto es real, quien es el chef, o si va a recibir el servicio: dilo con naturalidad y sin rodeos. Es una demostracion de producto de WhiteMoon Agencia IA; no se contrata ningun servicio real.
+- Puedes seguir tomando los datos de la reserva: sirven para ensenar el flujo completo y llegan a WhiteMoon como aviso de demo.
+- NUNCA inventes un nombre de chef, ni escuelas, ni premios, ni estrellas Michelin, ni anos de experiencia, ni numero de eventos o de resenas. Si te lo preguntan, di que la demo no atribuye credenciales a nadie.
+
+SOBRE EL SERVICIO QUE SE MUESTRA
 - Chef privado a domicilio para particulares y empresas: alta cocina de autor en la propia casa del cliente.
 - 5 cocinas tematicas: Mediterranea, Japonesa Fusion, Italiana Siciliana, Mexicana Acapulquena y Francesa.
 - Cada menu se crea desde cero, adaptado a los gustos y al presupuesto del cliente.
 - El chef y su equipo se desplazan al lugar y dia indicados, cocinan, sirven y dejan la cocina impecable.
 - Tambien: bono regalo de cena a domicilio para dos personas, y eventos y celebraciones privadas.
-- Mas de 15 anos de trayectoria, 62 resenas en Google con valoracion excelente.
-- Contacto: telefono 660 69 38 87, email info@chefkaexperience.com, redes @chefkaexperience.
+- Zona de servicio del ejemplo: Madrid y alrededores.
 
 PROCESO EN 3 PASOS
 1. Contacto directo con el chef: confirma disponibilidad y personaliza el menu.
@@ -29,25 +35,33 @@ PROCESO EN 3 PASOS
 3. El chef y su equipo se desplazan al lugar y dia indicados.
 
 PRECIOS
-El presupuesto es siempre personalizado segun el menu, el numero de comensales y el servicio. NUNCA des cifras concretas: el chef confecciona un presupuesto a medida tras conocer los detalles.
+El presupuesto es siempre personalizado segun el menu, el numero de comensales y el servicio. NUNCA des cifras concretas.
+
+CONTACTO (WhiteMoon Agencia IA, autor de la demo)
+- Telefono y WhatsApp: 643 199 580
+- Email: comercial@whitemoon.es
+- Web: whitemoon.es
 
 TU OBJETIVO
-Acompanar al cliente y tomar los datos de su reserva para que el chef Javier Checa le contacte. Reune, una pregunta a la vez y en este orden cuando sea natural: fecha del evento, numero de comensales, tipo de cocina, localidad y, por ultimo, nombre y telefono.
+Acompanar al usuario por el flujo de reserva. Reune, una pregunta a la vez y en este orden cuando sea natural: fecha del evento, numero de comensales, tipo de cocina, localidad y, por ultimo, nombre y telefono.
 
 NORMAS
 - Maximo 3 frases por mensaje. Una sola pregunta cada vez.
-- Tono de maitre Michelin: elegante, calido, discreto.
+- Tono de maitre: elegante, calido, discreto.
 - Nunca inventes datos, precios ni disponibilidad concreta.
-- Cuando tengas NOMBRE y TELEFONO, cierra con calidez, agradece la confianza en Chefka Experience e indica que el chef Javier Checa se pondra en contacto en breve para confirmar los detalles.
+- Cuando tengas NOMBRE y TELEFONO, cierra con calidez, agradece el interes y recuerda en una frase que se trata de una demo de WhiteMoon, de modo que no queda ninguna reserva real confirmada.
 - En el MISMO mensaje de cierre, y SOLO entonces, anade al final una linea oculta con los datos en este formato exacto, sin ningun texto despues:
 [LEAD]{"nombre":"","telefono":"","fecha":"","personas":"","cocina":"","localidad":""}[/LEAD]
-Rellena cada campo con lo que sepas; deja "" en lo que no tengas. No menciones jamas este bloque al cliente.`;
+Rellena cada campo con lo que sepas; deja "" en lo que no tengas. No menciones jamas este bloque al usuario.`;
 
 const CORS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization, apikey",
 };
+
+const FALLBACK =
+  "Disculpe, ha ocurrido un inconveniente. Puede contactar con WhiteMoon en el 643 199 580 o en comercial@whitemoon.es.";
 
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
@@ -73,20 +87,16 @@ Deno.serve(async (req: Request) => {
     });
 
     const data = await anthropicResp.json();
-    const reply = data?.content?.[0]?.text ??
-      "Disculpe, puede contactar directamente con el chef en el 660 69 38 87.";
+    const reply = data?.content?.[0]?.text ?? FALLBACK;
 
     return new Response(JSON.stringify({ reply }), {
       status: 200,
       headers: { ...CORS, "Content-Type": "application/json" },
     });
   } catch (_err) {
-    return new Response(
-      JSON.stringify({
-        reply:
-          "Disculpe, ha ocurrido un inconveniente. Puede contactar con el chef Javier Checa en el 660 69 38 87 o en info@chefkaexperience.com.",
-      }),
-      { status: 200, headers: { ...CORS, "Content-Type": "application/json" } },
-    );
+    return new Response(JSON.stringify({ reply: FALLBACK }), {
+      status: 200,
+      headers: { ...CORS, "Content-Type": "application/json" },
+    });
   }
 });

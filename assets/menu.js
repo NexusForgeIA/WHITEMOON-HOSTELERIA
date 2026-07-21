@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Chefka Experience — JS compartido de las páginas de menú individuales.
+   WhiteMoon · Chef Privado (demo) — JS compartido de las páginas de menú.
    Nav + dropdown "Mis propuestas" + menú móvil + cursor + reveal + chatbot.
    El chatbot replica exactamente el de index.html (Supabase edge functions).
    ========================================================================== */
@@ -11,8 +11,8 @@
   /* ---------- Config (idéntico a index.html) ---------- */
   var SUPABASE_URL = 'https://mlaqtniujnvfxcvcourm.supabase.co';
   var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sYXF0bml1am52ZnhjdmNvdXJtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4MzUyMzIsImV4cCI6MjA5MzQxMTIzMn0.Neh7VUS8ADsxf0DPab0JoJyGXOAXnLIaXzXbKzj2BGs';
-  var CHAT_FN   = SUPABASE_URL + '/functions/v1/chefka-chat';
-  var NOTIFY_FN = SUPABASE_URL + '/functions/v1/chefka-notify';
+  var CHAT_FN   = SUPABASE_URL + '/functions/v1/chef-chat';
+  var NOTIFY_FN = SUPABASE_URL + '/functions/v1/chef-notify';
 
   function saveLead(payload){
     return fetch(SUPABASE_URL + '/rest/v1/leads_web', {
@@ -21,7 +21,8 @@
       body:JSON.stringify(payload)
     }).catch(function(e){ console.warn('saveLead', e); });
   }
-  function notifyWhatsApp(data){
+  /* Aviso por Telegram; el token vive solo en la Edge Function (Deno.env). */
+  function notifyTelegram(data){
     return fetch(NOTIFY_FN, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) })
       .catch(function(e){ console.warn('notify', e); });
   }
@@ -125,7 +126,7 @@
     chat.classList.add('open');
     if (!greeted){
       greeted = true;
-      setTimeout(function(){ addMsg('bot', 'Bienvenido a Chefka Experience. Soy Elena. ¿En qué puedo ayudarle?'); }, 800);
+      setTimeout(function(){ addMsg('bot', 'Bienvenido a WhiteMoon · Chef Privado. Soy LUNA, la asistente de reservas. ¿En qué puedo ayudarle?'); }, 800);
     }
   }
   function closeChat(){ chat.classList.remove('open'); }
@@ -161,11 +162,11 @@
       var d = {};
       try { d = JSON.parse(m[1]); } catch(e){ d = {}; }
       if (d.telefono){
-        var mensaje = 'Reserva vía chat Elena | Fecha: ' + (d.fecha||'-') + ' | Personas: ' + (d.personas||'-') +
+        var mensaje = 'Reserva vía chat LUNA | Fecha: ' + (d.fecha||'-') + ' | Personas: ' + (d.personas||'-') +
                       ' | Cocina: ' + (d.cocina||'-') + ' | Localidad: ' + (d.localidad||'-');
         saveLead({ nombre:d.nombre||'', telefono:d.telefono||'', email:'', sector:'hosteleria-chef',
-          interes:'chefka-experience', mensaje:mensaje, origen:'chefka-experience-chat', fecha:new Date().toISOString() });
-        notifyWhatsApp({ nombre:d.nombre, telefono:d.telefono, fecha:d.fecha, personas:d.personas, servicio:d.cocina, cocina:d.cocina, localidad:d.localidad });
+          interes:'whitemoon-chef-demo', mensaje:mensaje, origen:'whitemoon-chef-demo-chat', fecha:new Date().toISOString() });
+        notifyTelegram({ nombre:d.nombre, telefono:d.telefono, fecha:d.fecha, personas:d.personas, servicio:d.cocina, cocina:d.cocina, localidad:d.localidad });
       }
     }
     return clean || text;
@@ -180,12 +181,12 @@
       .then(function(r){ return r.json(); })
       .then(function(data){
         t.remove();
-        var reply = (data && data.reply) ? data.reply : 'Disculpe, puede contactar con el chef en el 660 69 38 87.';
+        var reply = (data && data.reply) ? data.reply : 'Disculpe, puede contactar con nosotros en el 643 199 580.';
         var shown = handleLeadMarker(reply);
         history.push({role:'assistant', content:reply});
         addMsg('bot', shown);
       })
-      .catch(function(){ t.remove(); addMsg('bot', 'Disculpe, ha habido un inconveniente. Puede llamar al 660 69 38 87.'); });
+      .catch(function(){ t.remove(); addMsg('bot', 'Disculpe, ha habido un inconveniente. Puede llamar al 643 199 580.'); });
   }
 
   if (fab){
